@@ -1,5 +1,14 @@
 # JCU Weather Prediction Project
 
+## Roadmap
+
+1. Create model with Python and Fetch data with Go
+2. Create documentation with Go
+3. Create an API to fetch weather data
+4. Create ReactJS front-end for user experience
+5. Push documentation online on React app
+6. Check usecases, errors, unit tests
+   
 First push 20/06/2023: 
 
 * Go and Python environment setup

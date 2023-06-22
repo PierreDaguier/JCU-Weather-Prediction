@@ -11,7 +11,7 @@ import (
 	"gonum.org/v1/gonum/stat"
 )
 
-func main() {
+func main0() {
 	// Open the file
 	csvfile, err := os.Open("data/weatherAUS.csv")
 	if err != nil {

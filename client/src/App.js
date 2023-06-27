@@ -1,5 +1,6 @@
 import React from 'react';
 import WeatherForm from './weatherForm';
+import 'antd'
 
 function App() {
   const handleFormSubmit = (weatherData) => {

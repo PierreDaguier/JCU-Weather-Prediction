@@ -1,295 +1,187 @@
 import React, { useState } from 'react';
 
-function WeatherForm() {
-    const [date, setDate] = useState('');
-    const [location, setLocation] = useState('');
-    const [windGustDir, setWindGustDir] = useState('');
-    const [minTemp, setMinTemp] = useState('');
-    const [maxTemp, setMaxTemp] = useState('');
-    const [rainfall, setRainfall] = useState('');
-    const [evaporation, setEvaporation] = useState('');
-    const [sunshine, setSunshine] = useState('');
-    const [windGustSpeed, setWindGustSpeed] = useState('');
-    const [windSpeed9am, setWindSpeed9am] = useState('');
-    const [windSpeed3pm, setWindSpeed3pm] = useState('');
-    const [humidity9am, setHumidity9am] = useState('');
-    const [humidity3pm, setHumidity3pm] = useState('');
-    const [pressure9am, setPressure9am] = useState('');
-    const [pressure3pm, setPressure3pm] = useState('');
-    const [cloud9am, setCloud9am] = useState('');
-    const [cloud3pm, setCloud3pm] = useState('');
-    const [temp9am, setTemp9am] = useState('');
-    const [temp3pm, setTemp3pm] = useState('');
-    const [windDir9am, setWindDir9am] = useState('');
-    const [windDir3pm, setWindDir3pm] = useState('');
+import { Layout, Menu, Form, Input, Button, Select, DatePicker, Typography } from 'antd';
+import { AppstoreOutlined } from '@ant-design/icons';
 
-const [rainToday, setRainToday] = useState('');
-  const [prediction, setPrediction] = useState(null);
+const { Option } = Select;
+const { Header, Content, Footer } = Layout;
+const { Title } = Typography;
 
-  const submitForm = (event) => {
-    event.preventDefault();
-    // console.log(JSON.stringify({ date,location, windGustDir, windDir9am, windDir3pm, rainToday,minTemp, maxTemp, rainfall, evaporation, sunshine, windGustSpeed, windSpeed9am, windSpeed3pm, humidity9am, humidity3pm, pressure9am, pressure3pm, cloud9am, cloud3pm, temp9am, temp3pm }));
 
-    fetch("http://localhost:8080/predict", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ 
-        date,
-        location, 
-        windGustDir, 
-        windDir9am, 
-        windDir3pm, 
-        rainToday,
-        minTemp: parseFloat(minTemp), 
-        maxTemp: parseFloat(maxTemp), 
-        rainfall: parseFloat(rainfall),  
-        evaporation: parseFloat(evaporation), 
-        sunshine: parseFloat(sunshine), 
-        windGustSpeed: parseFloat(windGustSpeed), 
-        windSpeed9am: parseFloat(windSpeed9am), 
-        windSpeed3pm: parseFloat(windSpeed3pm), 
-        humidity9am: parseFloat(humidity9am), 
-        humidity3pm: parseFloat(humidity3pm), 
-        pressure9am: parseFloat(pressure9am), 
-        pressure3pm: parseFloat(pressure3pm), 
-        cloud9am: parseFloat(cloud9am), 
-        cloud3pm: parseFloat(cloud3pm), 
-        temp9am: parseFloat(temp9am), 
-        temp3pm: parseFloat(temp3pm),
 
-        })
-    })
-    .then(response => response.json())
-    .then(data => setPrediction(data.result))
-    .catch(error => console.log(error));
+const directions = ['N','NE','E','SE','S','SW','W','NW']; 
 
-    setMinTemp('');
-    setMaxTemp('');
-    setRainfall('');
-    setEvaporation('');
-    setSunshine('');
-    setWindGustSpeed('');
-    setWindSpeed9am('');
-    setWindSpeed3pm('');
-    setHumidity9am('');
-    setHumidity3pm('');
-    setPressure9am('');
-    setPressure3pm('');
-    setCloud9am('');
-    setCloud3pm('');
-    setTemp9am('');
-    setTemp3pm('');
-  };
 
+  function WeatherForm() {
+    const [form] = Form.useForm();
+    const [prediction, setPrediction] = useState(null);
+  
+    const submitForm = (values) => {
+        const payload = {
+            ...values,
+            date: values.date.format("YYYY-MM-DD"),
+            minTemp: parseFloat(values.minTemp),
+            maxTemp: parseFloat(values.maxTemp),
+            rainfall: parseFloat(values.rainfall),
+            evaporation: parseFloat(values.evaporation),
+            sunshine: parseFloat(values.sunshine),
+            windGustSpeed: parseFloat(values.windGustSpeed),
+            windDir9am: values.windDir9am,
+            windDir3pm: values.windDir3pm,
+            windSpeed9am: parseFloat(values.windSpeed9am),
+            windSpeed3pm: parseFloat(values.windSpeed3pm),
+            humidity9am: parseFloat(values.humidity9am),
+            humidity3pm: parseFloat(values.humidity3pm),
+            pressure9am: parseFloat(values.pressure9am),
+            pressure3pm: parseFloat(values.pressure3pm),
+            cloud9am: parseFloat(values.cloud9am),
+            cloud3pm: parseFloat(values.cloud3pm),
+            temp9am: parseFloat(values.temp9am),
+            temp3pm: parseFloat(values.temp3pm),
+          }
+        console.log(payload)
+      fetch("http://localhost:8080/predict", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      })
+        .then(response => response.json())
+        .then(data => setPrediction(data.result))
+        .catch(error => console.log(error));
+
+      form.resetFields();
+    };
   return (
+
+    
     <div>
 
   <div>
-    <form onSubmit={submitForm}>
-      <label>
-        Date:
-        <input
-          type="date"
-          value={date}
-          onChange={(e) => setDate(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        Location:
-        <input
-          type="text"
-          location={location}
-          onChange={(e) => setLocation(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        Minimum Temperature:
-        <input
-          type="number"
-          value={minTemp}
-          onChange={(e) => setMinTemp(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        Maximum Temperature:
-        <input
-          type="number"
-          value={maxTemp}
-          onChange={(e) => setMaxTemp(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        Rainfall:
-        <input
-          type="number"
-          value={rainfall}
-          onChange={(e) => setRainfall(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        Evaporation:
-        <input
-          type="number"
-          value={evaporation}
-          onChange={(e) => setEvaporation(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        Sunshine:
-        <input
-          type="number"
-          value={sunshine}
-          onChange={(e) => setSunshine(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        Wind Gust Direction:
-        <select value={windGustDir} onChange={(e) => setWindGustDir(e.target.value)} required>
-          <option value="">Select...</option>
-          <option value="N">N</option>
-          <option value="NE">NE</option>
-          <option value="E">E</option>
-          <option value="SE">SE</option>
-          <option value="S">S</option>
-          <option value="SW">SW</option>
-          <option value="W">W</option>
-          <option value="NW">NW</option>
 
-        </select>
-      </label>
-      <label>
-        Wind Gust Speed:
-        <input
-          type="number"
-          value={windGustSpeed}
-          onChange={(e) => setWindGustSpeed(e.target.value)}
-          required
-        />
-      </label>
+        
 
-      <label>
-  Wind Direction at 9am:
-  <select value={windDir9am} onChange={(e) => setWindDir9am(e.target.value)} required>
-          <option value="">Select...</option>
-          <option value="N">N</option>
-          <option value="NE">NE</option>
-          <option value="E">E</option>
-          <option value="SE">SE</option>
-          <option value="S">S</option>
-          <option value="SW">SW</option>
-          <option value="W">W</option>
-          <option value="NW">NW</option>
+<Layout>
+<Header style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
+    <div className="logo" />
+    <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['1']}>
+        <Menu.Item key="1"><AppstoreOutlined />Weather Prediction</Menu.Item>
+        <Menu.Item key="2"><AppstoreOutlined />Documentation</Menu.Item>
+    </Menu>
+</Header>
+<Content className="site-layout" style={{ padding: '0 50px', marginTop: 64 }}>
+    <div className="site-layout-background" style={{ padding: 24, minHeight: 380 }}>
+        <Title level={2}>Weather Prediction Form</Title>
+        <p>This form uses machine learning to predict whether it will rain tomorrow based on the weather data you input.</p>
+        <Form onFinish={submitForm} layout="vertical" form={form}>
+        <Form.Item label="Date" name="date" rules={[{ required: true }]}>
+            <DatePicker format="YYYY-MM-DD" />
+        </Form.Item>
+      <Form.Item label="Location" name="location" rules={[{ required: true }]}>
+        <Input />
+      </Form.Item>
+      <Form.Item label="Wind Gust Direction" name="windGustDir" rules={[{ required: true }]}>
+        <Select>
+          {directions.map(dir => <Option key={dir} value={dir}>{dir}</Option>)}
+        </Select>
+      </Form.Item>
+      <Form.Item label="Wind Direction 9am" name="windDir9am" rules={[{ required: true }]}>
+        <Select>
+          {directions.map(dir => <Option key={dir} value={dir}>{dir}</Option>)}
+        </Select>
+      </Form.Item>
+      <Form.Item label="Wind Direction 3pm" name="windDir3pm" rules={[{ required: true }]}>
+        <Select>
+          {directions.map(dir => <Option key={dir} value={dir}>{dir}</Option>)}
+        </Select>
+      </Form.Item>
+      <Form.Item label="Min Temp" name="minTemp" rules={[{ required: true }]}>
+        <Input />
+      </Form.Item>
+      <Form.Item label="Max Temp" name="maxTemp" rules={[{ required: true }]}>
+        <Input />
+      </Form.Item>
+      <Form.Item label="Rainfall" name="rainfall" rules={[{ required: true }]}>
+        <Input />
+      </Form.Item>
 
-        </select>
-</label>
-<label>
-  Wind Direction at 3pm:
-  <select value={windDir3pm} onChange={(e) => setWindDir3pm(e.target.value)} required>
-          <option value="">Select...</option>
-          <option value="N">N</option>
-          <option value="NE">NE</option>
-          <option value="E">E</option>
-          <option value="SE">SE</option>
-          <option value="S">S</option>
-          <option value="SW">SW</option>
-          <option value="W">W</option>
-          <option value="NW">NW</option>
+      <Form.Item label="Evaporation" name="evaporation" rules={[{ required: true }]}>
+        <Input />
+      </Form.Item>
 
-        </select>
-</label>
-<label>
-  Humidity at 9am:
-  <input
-    type="number"
-    value={humidity9am}
-    onChange={(e) => setHumidity9am(e.target.value)}
-    required
-  />
-</label>
-<label>
-  Humidity at 3pm:
-  <input
-    type="number"
-    value={humidity3pm}
-    onChange={(e) => setHumidity3pm(e.target.value)}
-    required
-  />
-</label>
-<label>
-  Pressure at 9am:
-  <input
-    type="number"
-    value={pressure9am}
-    onChange={(e) => setPressure9am(e.target.value)}
-    required
-  />
-</label>
-<label>
-  Pressure at 3pm:
-  <input
-    type="number"
-    value={pressure3pm}
-    onChange={(e) => setPressure3pm(e.target.value)}
-    required
-  />
-</label>
-<label>
-  Cloud cover at 9am:
-  <input
-    type="number"
-    value={cloud9am}
-    onChange={(e) => setCloud9am(e.target.value)}
-    required
-  />
-</label>
-<label>
-  Cloud cover at 3pm:
-  <input
-    type="number"
-    value={cloud3pm}
-    onChange={(e) => setCloud3pm(e.target.value)}
-    required
-  />
-</label>
-<label>
-  Temperature at 9am:
-  <input
-    type="number"
-    value={temp9am}
-    onChange={(e) => setTemp9am(e.target.value)}
-    required
-  />
-</label>
-<label>
-  Temperature at 3pm:
-  <input
-    type="number"
-    value={temp3pm}
-    onChange={(e) => setTemp3pm(e.target.value)}
-    required
-  />
-</label>
-<label>
-  Rain Today:
-  <input
-    type="text"
-    value={rainToday}
-    onChange={(e) => setRainToday(e.target.value)}
-    required
-  />
-</label>
-      <button type="submit">Predict</button>
-    </form>
-    {prediction && <p>The weather prediction is: {prediction===true?"Rain tomorrow":"No Rain tomorrow"}</p>}
+      <Form.Item label="Sunshine" name="sunshine" rules={[{ required: true }]}>
+        <Input />
+      </Form.Item>
+
+      <Form.Item label="Wind Gust Speed" name="windGustSpeed" rules={[{ required: true }]}>
+        <Input />
+      </Form.Item>
+
+      <Form.Item label="Wind Speed 9am" name="windSpeed9am" rules={[{ required: true }]}>
+        <Input />
+      </Form.Item>
+
+      <Form.Item label="Wind Speed 3pm" name="windSpeed3pm" rules={[{ required: true }]}>
+        <Input />
+      </Form.Item>
+
+      <Form.Item label="Humidity 9am" name="humidity9am" rules={[{ required: true }]}>
+        <Input />
+      </Form.Item>
+
+      <Form.Item label="Humidity 3pm" name="humidity3pm" rules={[{ required: true }]}>
+        <Input />
+      </Form.Item>
+
+      <Form.Item label="Pressure 9am" name="pressure9am" rules={[{ required: true }]}>
+        <Input />
+      </Form.Item>
+
+      <Form.Item label="Pressure 3pm" name="pressure3pm" rules={[{ required: true }]}>
+        <Input />
+      </Form.Item>
+
+      <Form.Item label="Cloud 9am" name="cloud9am" rules={[{ required: true }]}>
+        <Input />
+      </Form.Item>
+
+      <Form.Item label="Cloud 3pm" name="cloud3pm" rules={[{ required: true }]}>
+        <Input />
+      </Form.Item>
+
+      <Form.Item label="Temp 9am" name="temp9am" rules={[{ required: true }]}>
+        <Input />
+      </Form.Item>
+
+      <Form.Item label="Temp 3pm" name="temp3pm" rules={[{ required: true }]}>
+        <Input />
+      </Form.Item>
+
+      <Form.Item label="Rain Today" name="rainToday" rules={[{ required: true }]}>
+        <Select>
+          <Option value="Yes">Yes</Option>
+          <Option value="No">No</Option>
+        </Select>
+      </Form.Item>
+
+      <Form.Item>
+        <Button type="primary" htmlType="submit">Predict</Button>
+      </Form.Item>
+
+      {prediction && (
+        <Form.Item label="Prediction">
+          <Input disabled value={prediction} />
+        </Form.Item>
+      )}
+    </Form>
+    </div>
+</Content>
+<Footer style={{ textAlign: 'center' }}>Weather Prediction ©2023 Created by Your Name</Footer>
+</Layout>
+
+{prediction && <p>The weather prediction is: {prediction===true?"Rain tomorrow":"No Rain tomorrow"}</p>}
   </div>
     </div>
+
   );
 }
 

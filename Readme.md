@@ -26,6 +26,12 @@ Third push (25/06/2023):
 * Modification of backend scripts (main.go and predict.py) to ensure smooth interaction with frontend
 * Successful execution of prediction flow from user interface to machine learning model and back
 
+Push 4 (27/06/2023):
+
+* Ant Design for React implementation
+* Menu bar and footer added
+* Front page first build
+
 ## About dataset used
 
 > Observations were drawn from numerous weather stations. The daily observations are available from http://www.bom.gov.au/climate/data.

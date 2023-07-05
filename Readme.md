@@ -32,6 +32,15 @@ Push 4 (27/06/2023):
 * Menu bar and footer added
 * Front page first build
 
+Push 5 (05/07/2023):
+* Model.py
+ - Imputation added on numeric data during data treatment to clean uncomplete lines
+ - Model parameter tuning 
+ - Changed model training environment to Google Colab
+* Added few sliders for test purpose on front-end
+* Create a whole new analyze folder, it contains many scripts made to have data about the dataset
+* output.pdf, output.txt is the result of anayzeTrendsDataset.py, it gives important insight about the weatherdataset.
+
 ## About dataset used
 
 > Observations were drawn from numerous weather stations. The daily observations are available from http://www.bom.gov.au/climate/data.

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { Layout, Menu, Form, Input, Button, Select, DatePicker, Typography } from 'antd';
+import { Layout, Menu, Form, Input, Button, Slider, Select, DatePicker, Typography } from 'antd';
 import { AppstoreOutlined } from '@ant-design/icons';
 
 const { Option } = Select;
@@ -95,65 +95,264 @@ const directions = ['N','NE','E','SE','S','SW','W','NW'];
         </Select>
       </Form.Item>
       <Form.Item label="Min Temp" name="minTemp" rules={[{ required: true }]}>
-        <Input />
+        <Slider
+          min={-10}
+          max={50}
+          marks={{
+            "-10": '-10°C',
+            0: '0°C',
+            10: '10°C',
+            20: '20°C',
+            30: '30°C',
+            40: '40°C',
+            50: '50°C'
+          }}
+        />
       </Form.Item>
       <Form.Item label="Max Temp" name="maxTemp" rules={[{ required: true }]}>
-        <Input />
+      <Slider
+          min={-10}
+          max={50}
+          marks={{
+            "-10": '-10°C',
+            0: '0°C',
+            10: '10°C',
+            20: '20°C',
+            30: '30°C',
+            40: '40°C',
+            50: '50°C'
+          }}
+        />
       </Form.Item>
       <Form.Item label="Rainfall" name="rainfall" rules={[{ required: true }]}>
-        <Input />
+      <Slider
+          min={0.0}
+          max={400.0}
+          marks={{
+            0.0: '0mm',
+            40.0: '40mm',
+            80.0: '80mm',
+            120.0: '120mm',
+            160.0: '160mm',
+            200.0: '200mm',
+            240.0: '240mm',
+            280.0: '280mm',
+            320.0: '320mm',
+            360.0: '360mm',
+            400.0: '400mm' 
+          }}
+        />
       </Form.Item>
 
       <Form.Item label="Evaporation" name="evaporation" rules={[{ required: true }]}>
-        <Input />
+      <Slider
+          min={0}
+          max={150}
+          marks={{
+            0: '0mm',
+            15: '15mm',
+            30: '30mm',
+            45: '45mm',
+            60: '60mm',
+            75: '75mm',
+            90: '90mm',
+            105: '105mm',
+            120: '120mm',
+            135: '135mm',
+            150: '150mm'
+          }}
+        />
       </Form.Item>
 
       <Form.Item label="Sunshine" name="sunshine" rules={[{ required: true }]}>
-        <Input />
+      <Slider
+          min={0.0}
+          max={15}
+          marks={{
+            0: '0°C',
+            10: '10°C',
+            20: '20°C',
+            30: '30°C',
+            40: '40°C',
+            50: '50°C'
+          }}
+        />
       </Form.Item>
 
       <Form.Item label="Wind Gust Speed" name="windGustSpeed" rules={[{ required: true }]}>
-        <Input />
+      <Slider
+          min={-10}
+          max={50}
+          marks={{
+            "-10": '-10°C',
+            0: '0°C',
+            10: '10°C',
+            20: '20°C',
+            30: '30°C',
+            40: '40°C',
+            50: '50°C'
+          }}
+        />
       </Form.Item>
 
       <Form.Item label="Wind Speed 9am" name="windSpeed9am" rules={[{ required: true }]}>
-        <Input />
+      <Slider
+          min={-10}
+          max={50}
+          marks={{
+            "-10": '-10°C',
+            0: '0°C',
+            10: '10°C',
+            20: '20°C',
+            30: '30°C',
+            40: '40°C',
+            50: '50°C'
+          }}
+        />
       </Form.Item>
 
       <Form.Item label="Wind Speed 3pm" name="windSpeed3pm" rules={[{ required: true }]}>
-        <Input />
+      <Slider
+          min={-10}
+          max={50}
+          marks={{
+            "-10": '-10°C',
+            0: '0°C',
+            10: '10°C',
+            20: '20°C',
+            30: '30°C',
+            40: '40°C',
+            50: '50°C'
+          }}
+        />
       </Form.Item>
 
       <Form.Item label="Humidity 9am" name="humidity9am" rules={[{ required: true }]}>
-        <Input />
+      <Slider
+          min={-10}
+          max={50}
+          marks={{
+            "-10": '-10°C',
+            0: '0°C',
+            10: '10°C',
+            20: '20°C',
+            30: '30°C',
+            40: '40°C',
+            50: '50°C'
+          }}
+        />
       </Form.Item>
 
       <Form.Item label="Humidity 3pm" name="humidity3pm" rules={[{ required: true }]}>
-        <Input />
+      <Slider
+          min={-10}
+          max={50}
+          marks={{
+            "-10": '-10°C',
+            0: '0°C',
+            10: '10°C',
+            20: '20°C',
+            30: '30°C',
+            40: '40°C',
+            50: '50°C'
+          }}
+        />
       </Form.Item>
 
       <Form.Item label="Pressure 9am" name="pressure9am" rules={[{ required: true }]}>
-        <Input />
+      <Slider
+          min={-10}
+          max={50}
+          marks={{
+            "-10": '-10°C',
+            0: '0°C',
+            10: '10°C',
+            20: '20°C',
+            30: '30°C',
+            40: '40°C',
+            50: '50°C'
+          }}
+        />
       </Form.Item>
 
       <Form.Item label="Pressure 3pm" name="pressure3pm" rules={[{ required: true }]}>
-        <Input />
+      <Slider
+          min={-10}
+          max={50}
+          marks={{
+            "-10": '-10°C',
+            0: '0°C',
+            10: '10°C',
+            20: '20°C',
+            30: '30°C',
+            40: '40°C',
+            50: '50°C'
+          }}
+        />
       </Form.Item>
 
       <Form.Item label="Cloud 9am" name="cloud9am" rules={[{ required: true }]}>
-        <Input />
+      <Slider
+          min={-10}
+          max={50}
+          marks={{
+            "-10": '-10°C',
+            0: '0°C',
+            10: '10°C',
+            20: '20°C',
+            30: '30°C',
+            40: '40°C',
+            50: '50°C'
+          }}
+        />
       </Form.Item>
 
       <Form.Item label="Cloud 3pm" name="cloud3pm" rules={[{ required: true }]}>
-        <Input />
+      <Slider
+          min={-10}
+          max={50}
+          marks={{
+            "-10": '-10°C',
+            0: '0°C',
+            10: '10°C',
+            20: '20°C',
+            30: '30°C',
+            40: '40°C',
+            50: '50°C'
+          }}
+        />
       </Form.Item>
 
       <Form.Item label="Temp 9am" name="temp9am" rules={[{ required: true }]}>
-        <Input />
+      <Slider
+          min={-10}
+          max={50}
+          marks={{
+            "-10": '-10°C',
+            0: '0°C',
+            10: '10°C',
+            20: '20°C',
+            30: '30°C',
+            40: '40°C',
+            50: '50°C'
+          }}
+        />
       </Form.Item>
 
       <Form.Item label="Temp 3pm" name="temp3pm" rules={[{ required: true }]}>
-        <Input />
+      <Slider
+          min={-10}
+          max={50}
+          marks={{
+            "-10": '-10°C',
+            0: '0°C',
+            10: '10°C',
+            20: '20°C',
+            30: '30°C',
+            40: '40°C',
+            50: '50°C'
+          }}
+        />
       </Form.Item>
 
       <Form.Item label="Rain Today" name="rainToday" rules={[{ required: true }]}>

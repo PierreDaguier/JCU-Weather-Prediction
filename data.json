@@ -1,0 +1,191 @@
+{
+    "MinTemp":{
+        "min":-8.5,
+        "max":33.9
+    },
+    "MaxTemp":{
+        "min":-4.8,
+        "max":48.1
+    },
+    "Evaporation": 
+    {
+        "min": 0.0,
+        "max": 145.0
+    },
+    "Rainfall":{
+        "min":0.0,
+        "max":371.0
+    }, 
+    "Sunshine": 
+    {   
+        "min": 0.0, 
+        "max": 14.5
+    }, 
+    "WindGustSpeed": 
+    {
+        "min": 6.0,
+        "max": 135.0
+    }, 
+    "WindSpeed9am": 
+    {
+        "min": 0.0,
+        "max": 130.0
+    }, 
+    "WindSpeed3pm": 
+    {
+        "min": 0.0,
+        "max": 87.0
+    }, 
+    "Humidity9am": 
+    {   
+        "min": 0.0,
+        "max": 100.0
+    }, 
+    "Humidity3pm": 
+    {
+        "min": 0.0,
+        "max": 100.0
+    }, 
+    "Pressure9am": 
+    {
+        "min": 980.5,
+        "max": 1041.0
+    }, 
+    "Pressure3pm": 
+    {
+        "min": 977.1, 
+        "max": 1039.6
+    }, 
+    "Cloud9am": 
+    {
+        "min": 0.0, 
+        "max": 9.0
+    },
+    "Cloud3pm":
+    {
+        "min": 0.0,
+        "max": 9.0
+    }, 
+    "Temp9am":
+    {
+        "min": -7.2,
+        "max": 40.2
+    },
+    "Temp3pm":
+    {
+        "min": -5.4,
+        "max": 46.7
+    },
+    "WindGustDir":
+    [
+        "W", 
+        "WNW", 
+        "WSW", 
+        "NE", 
+        "NNW", 
+        "N", 
+        "NNE", 
+        "SW",
+        "nan",
+        "ENE",
+        "SSE",
+        "S", 
+        "NW",
+        "SE",
+        "ESE", 
+        "E", 
+        "SSW"
+    ], 
+    "WindDir9am": 
+    [
+        "W",
+        "NNW", 
+        "SE", 
+        "ENE", 
+        "SW", 
+        "SSE", 
+        "S", 
+        "NE", 
+        "nan",
+        "SSW",
+        "N", 
+        "WSW", 
+        "ESE", 
+        "E", 
+        "NW", 
+        "WNW", 
+        "NNE"
+    ], 
+    "WindDir3pm": 
+    [
+        "WNW",
+        "WSW", 
+        "E", 
+        "NW", 
+        "W", 
+        "SSE", 
+        "ESE", 
+        "ENE", 
+        "NNW", 
+        "SSW",
+        "SW", 
+        "SE", 
+        "N", 
+        "S", 
+        "NNE",
+        "nan", 
+        "NE"
+    ], 
+    "Location":
+    [
+        "Albury",
+        "BadgerysCreek", 
+        "Cobar", 
+        "CoffsHarbour",
+        "Moree", 
+        "Newcastle", 
+        "NorahHead", 
+        "NorfolkIsland", 
+        "Penrith", 
+        "Richmond", 
+        "Sydney", 
+        "SydneyAirport", 
+        "WaggaWagga", 
+        "Williamtown", 
+        "Wollongong",
+        "Canberra", 
+        "Tuggeranong", 
+        "MountGinini", 
+        "Ballarat", 
+        "Bendigo", 
+        "Sale", 
+        "MelbourneAirport", 
+        "Melbourne", 
+        "Mildura", 
+        "Nhil", 
+        "Portland",
+        "Watsonia", 
+        "Dartmoor", 
+        "Brisbane", 
+        "Cairns", 
+        "GoldCoast", 
+        "Townsville", 
+        "Adelaide", 
+        "MountGambier", 
+        "Nuriootpa", 
+        "Woomera", 
+        "Albany", 
+        "Witchcliffe", 
+        "PearceRAAF", 
+        "PerthAirport", 
+        "Perth", 
+        "SalmonGums", 
+        "Walpole", 
+        "Hobart", 
+        "Launceston", 
+        "AliceSprings",
+        "Darwin", 
+        "Katherine", 
+        "Uluru"
+    ]
+}

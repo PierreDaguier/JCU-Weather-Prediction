@@ -1,0 +1,597 @@
+INFO:root:Statistics for MinTemp:
+
+INFO:root:Rain
+INFO:root:count    31702.000000
+mean        13.186890
+std          6.317971
+min         -7.200000
+25%          8.500000
+50%         12.700000
+75%         17.900000
+max         30.700000
+Name: MinTemp, dtype: float64
+INFO:root:No Rain
+INFO:root:count    109854.000000
+mean         11.897675
+std           6.398699
+min          -8.500000
+25%           7.300000
+50%          11.800000
+75%          16.500000
+max          33.900000
+Name: MinTemp, dtype: float64
+INFO:root:Generated histogram for MaxTemp
+INFO:root:Statistics for MaxTemp:
+
+INFO:root:Rain
+INFO:root:count    31822.000000
+mean        21.119100
+std          6.911485
+min         -4.100000
+25%         16.100000
+50%         20.200000
+75%         25.800000
+max         46.800000
+Name: MaxTemp, dtype: float64
+INFO:root:No Rain
+INFO:root:count    110049.000000
+mean         23.836247
+std           7.059825
+min          -4.800000
+25%          18.600000
+50%          23.300000
+75%          28.800000
+max          48.100000
+Name: MaxTemp, dtype: float64
+INFO:root:Generated histogram for Evaporation
+INFO:root:Statistics for Evaporation:
+
+INFO:root:Rain
+INFO:root:count    17859.000000
+mean         4.527779
+std          3.469052
+min          0.000000
+25%          2.200000
+50%          3.800000
+75%          6.200000
+max         74.800000
+Name: Evaporation, dtype: float64
+INFO:root:No Rain
+INFO:root:count    63491.000000
+mean         5.734807
+std          4.332891
+min          0.000000
+25%          2.800000
+50%          5.000000
+75%          7.600000
+max        145.000000
+Name: Evaporation, dtype: float64
+INFO:root:Generated histogram for Rainfall
+INFO:root:Statistics for Rainfall:
+
+INFO:root:Rain
+INFO:root:count    31201.000000
+mean         6.142104
+std         14.318292
+min          0.000000
+25%          0.000000
+50%          0.800000
+75%          6.200000
+max        371.000000
+Name: Rainfall, dtype: float64
+INFO:root:No Rain
+INFO:root:count    109586.00000
+mean          1.27029
+std           5.33220
+min           0.00000
+25%           0.00000
+50%           0.00000
+75%           0.20000
+max         240.00000
+Name: Rainfall, dtype: float64
+INFO:root:Generated histogram for Sunshine
+INFO:root:Statistics for Sunshine:
+
+INFO:root:Rain
+INFO:root:count    16821.000000
+mean         4.471761
+std          3.359329
+min          0.000000
+25%          1.400000
+50%          4.300000
+75%          7.100000
+max         13.900000
+Name: Sunshine, dtype: float64
+INFO:root:No Rain
+INFO:root:count    57556.000000
+mean         8.546358
+std          3.380298
+min          0.000000
+25%          6.600000
+50%          9.400000
+75%         11.000000
+max         14.500000
+Name: Sunshine, dtype: float64
+INFO:root:Generated histogram for WindGustSpeed
+INFO:root:Statistics for WindGustSpeed:
+
+INFO:root:Rain
+INFO:root:count    29435.000000
+mean        45.946764
+std         15.717954
+min          7.000000
+25%         35.000000
+50%         44.000000
+75%         56.000000
+max        135.000000
+Name: WindGustSpeed, dtype: float64
+INFO:root:No Rain
+INFO:root:count    103488.000000
+mean         38.288391
+std          12.406522
+min           6.000000
+25%          30.000000
+50%          37.000000
+75%          44.000000
+max         126.000000
+Name: WindGustSpeed, dtype: float64
+INFO:root:Generated histogram for WindSpeed9am
+INFO:root:Statistics for WindSpeed9am:
+
+INFO:root:Rain
+INFO:root:count    31537.000000
+mean        15.508577
+std          9.607733
+min          0.000000
+25%          9.000000
+50%         15.000000
+75%         20.000000
+max         87.000000
+Name: WindSpeed9am, dtype: float64
+INFO:root:No Rain
+INFO:root:count    109308.000000
+mean         13.567314
+std           8.627578
+min           0.000000
+25%           7.000000
+50%          13.000000
+75%          19.000000
+max         130.000000
+Name: WindSpeed9am, dtype: float64
+INFO:root:Generated histogram for WindSpeed3pm
+INFO:root:Statistics for WindSpeed3pm:
+
+INFO:root:Rain
+INFO:root:count    31194.000000
+mean        20.078509
+std          9.781914
+min          0.000000
+25%         13.000000
+50%         19.000000
+75%         26.000000
+max         87.000000
+Name: WindSpeed3pm, dtype: float64
+INFO:root:No Rain
+INFO:root:count    108369.000000
+mean         18.222804
+std           8.455466
+min           0.000000
+25%          13.000000
+50%          17.000000
+75%          24.000000
+max          83.000000
+Name: WindSpeed3pm, dtype: float64
+INFO:root:Generated histogram for Humidity9am
+INFO:root:Statistics for Humidity9am:
+
+INFO:root:Rain
+INFO:root:count    31343.000000
+mean        77.983314
+std         16.108377
+min          5.000000
+25%         68.000000
+50%         80.000000
+75%         91.000000
+max        100.000000
+Name: Humidity9am, dtype: float64
+INFO:root:No Rain
+INFO:root:count    109076.000000
+mean         66.217573
+std          19.020703
+min           0.000000
+25%          55.000000
+50%          67.000000
+75%          80.000000
+max         100.000000
+Name: Humidity9am, dtype: float64
+INFO:root:Generated histogram for Humidity3pm
+INFO:root:Statistics for Humidity3pm:
+
+INFO:root:Rain
+INFO:root:count    30913.000000
+mean        68.800019
+std         19.037409
+min          1.000000
+25%         57.000000
+50%         70.000000
+75%         84.000000
+max        100.000000
+Name: Humidity3pm, dtype: float64
+INFO:root:No Rain
+INFO:root:count    107670.000000
+mean         46.510625
+std          18.489476
+min           0.000000
+25%          33.000000
+50%          47.000000
+75%          60.000000
+max         100.000000
+Name: Humidity3pm, dtype: float64
+INFO:root:Generated histogram for Pressure9am
+INFO:root:Statistics for Pressure9am:
+
+INFO:root:Rain
+INFO:root:count    28774.000000
+mean      1014.400000
+std          7.304373
+min        980.500000
+25%       1009.600000
+50%       1014.300000
+75%       1019.300000
+max       1039.500000
+Name: Pressure9am, dtype: float64
+INFO:root:No Rain
+INFO:root:count    99405.000000
+mean      1018.595599
+std          6.760700
+min        982.900000
+25%       1014.000000
+50%       1018.500000
+75%       1023.100000
+max       1041.000000
+Name: Pressure9am, dtype: float64
+INFO:root:Generated histogram for Pressure3pm
+INFO:root:Statistics for Pressure3pm:
+
+INFO:root:Rain
+INFO:root:count    28764.000000
+mean      1012.300820
+std          7.331664
+min        977.100000
+25%       1007.400000
+50%       1012.200000
+75%       1017.200000
+max       1036.900000
+Name: Pressure3pm, dtype: float64
+INFO:root:No Rain
+INFO:root:count    99448.000000
+mean      1016.113587
+std          6.710292
+min        983.200000
+25%       1011.500000
+50%       1016.000000
+75%       1020.600000
+max       1039.600000
+Name: Pressure3pm, dtype: float64
+INFO:root:Generated histogram for Cloud9am
+INFO:root:Statistics for Cloud9am:
+
+INFO:root:Rain
+INFO:root:count    20622.000000
+mean         6.099990
+std          2.216997
+min          0.000000
+25%          5.000000
+50%          7.000000
+75%          8.000000
+max          8.000000
+Name: Cloud9am, dtype: float64
+INFO:root:No Rain
+INFO:root:count    67914.000000
+mean         3.932282
+std          2.877299
+min          0.000000
+25%          1.000000
+50%          4.000000
+75%          7.000000
+max          9.000000
+Name: Cloud9am, dtype: float64
+INFO:root:Generated histogram for Cloud3pm
+INFO:root:Statistics for Cloud3pm:
+
+INFO:root:Rain
+INFO:root:count    20288.000000
+mean         6.360065
+std          1.947514
+min          0.000000
+25%          6.000000
+50%          7.000000
+75%          8.000000
+max          8.000000
+Name: Cloud3pm, dtype: float64
+INFO:root:No Rain
+INFO:root:count    64811.000000
+mean         3.921896
+std          2.667284
+min          0.000000
+25%          1.000000
+50%          4.000000
+75%          7.000000
+max          9.000000
+Name: Cloud3pm, dtype: float64
+INFO:root:Generated histogram for Temp9am
+INFO:root:Statistics for Temp9am:
+
+INFO:root:Rain
+INFO:root:count    31579.000000
+mean        16.676598
+std          6.378134
+min         -5.500000
+25%         11.900000
+50%         16.100000
+75%         21.100000
+max         37.500000
+Name: Temp9am, dtype: float64
+INFO:root:No Rain
+INFO:root:count    109710.000000
+mean         17.077001
+std           6.522764
+min          -7.200000
+25%          12.400000
+50%          16.900000
+75%          21.700000
+max          40.200000
+Name: Temp9am, dtype: float64
+INFO:root:Generated histogram for Temp3pm
+INFO:root:Statistics for Temp3pm:
+
+INFO:root:Rain
+INFO:root:count    31135.000000
+mean        19.197113
+std          6.657981
+min         -4.400000
+25%         14.300000
+50%         18.400000
+75%         23.600000
+max         46.100000
+Name: Temp3pm, dtype: float64
+INFO:root:No Rain
+INFO:root:count    108332.000000
+mean         22.402905
+std           6.850466
+min          -5.400000
+25%          17.400000
+50%          21.900000
+75%          27.100000
+max          46.700000
+Name: Temp3pm, dtype: float64
+INFO:root:Generated bar chart for WindGustDir
+INFO:root:Frequencies for WindGustDir:
+
+INFO:root:Rain
+INFO:root:WindGustDir
+W      0.088643
+N      0.083373
+NW     0.077661
+WNW    0.077355
+WSW    0.070894
+S      0.068582
+SSW    0.064502
+NNW    0.063346
+SW     0.061340
+SSE    0.059674
+SE     0.058926
+NNE    0.050357
+E      0.045903
+NE     0.044849
+ENE    0.043795
+ESE    0.040802
+Name: proportion, dtype: float64
+INFO:root:No Rain
+INFO:root:WindGustDir
+E      0.074633
+SE     0.073231
+SSE    0.069964
+W      0.069336
+SW     0.067596
+S      0.067006
+WSW    0.065885
+SSW    0.064889
+ENE    0.064802
+N      0.063613
+ESE    0.059012
+WNW    0.055977
+NE     0.055494
+NW     0.055281
+NNE    0.047867
+NNW    0.045412
+Name: proportion, dtype: float64
+INFO:root:Generated bar chart for WindDir9am
+INFO:root:Frequencies for WindDir9am:
+
+INFO:root:Rain
+INFO:root:WindDir9am
+N      0.117172
+NNW    0.081119
+NW     0.079750
+W      0.072006
+NNE    0.071338
+WNW    0.065029
+SW     0.063727
+WSW    0.056483
+S      0.056116
+SSW    0.054914
+SSE    0.053445
+NE     0.052343
+SE     0.049773
+ENE    0.045567
+E      0.043898
+ESE    0.037321
+Name: proportion, dtype: float64
+INFO:root:No Rain
+INFO:root:WindDir9am
+N      0.077115
+E      0.075413
+SE     0.075041
+SSE    0.072048
+S      0.066638
+ESE    0.062999
+ENE    0.062314
+SW     0.061903
+NW     0.060289
+W      0.059702
+NE     0.058294
+NNE    0.056846
+SSW    0.056767
+NNW    0.052923
+WNW    0.051319
+WSW    0.050389
+Name: proportion, dtype: float64
+INFO:root:Generated bar chart for WindDir3pm
+INFO:root:Frequencies for WindDir3pm:
+
+INFO:root:Rain
+INFO:root:WindDir3pm
+W      0.082014
+N      0.078543
+WNW    0.077861
+NW     0.077634
+NNW    0.070919
+WSW    0.067902
+S      0.067318
+SE     0.065890
+SW     0.058656
+SSW    0.058039
+SSE    0.056774
+NNE    0.051161
+NE     0.049994
+E      0.046360
+ESE    0.046100
+ENE    0.044835
+Name: proportion, dtype: float64
+INFO:root:No Rain
+INFO:root:WindDir3pm
+SE     0.080230
+S      0.069922
+SSE    0.068705
+W      0.068621
+SW     0.068537
+WSW    0.067255
+ESE    0.064699
+E      0.064253
+NE     0.061557
+ENE    0.058945
+WNW    0.058146
+N      0.058053
+SSW    0.057821
+NW     0.056464
+NNW    0.051556
+NNE    0.045236
+Name: proportion, dtype: float64
+INFO:root:Generated bar chart for Location
+INFO:root:Frequencies for Location:
+
+INFO:root:Rain
+INFO:root:Location
+Portland            0.034351
+Cairns              0.029802
+Walpole             0.029771
+Dartmoor            0.028924
+MountGambier        0.028861
+NorfolkIsland       0.028830
+Albany              0.028296
+Witchcliffe         0.027575
+CoffsHarbour        0.027261
+Sydney              0.027136
+Darwin              0.026728
+MountGinini         0.025693
+NorahHead           0.025347
+Ballarat            0.024500
+GoldCoast           0.024312
+SydneyAirport       0.024281
+Hobart              0.023873
+Watsonia            0.023151
+Newcastle           0.022932
+Wollongong          0.022367
+Brisbane            0.022242
+Williamtown         0.021959
+Launceston          0.021928
+Adelaide            0.021583
+MelbourneAirport    0.020485
+Perth               0.020234
+Sale                0.020171
+Melbourne           0.019952
+Canberra            0.019732
+Albury              0.019387
+Penrith             0.018665
+Nuriootpa           0.018571
+BadgerysCreek       0.018289
+Tuggeranong         0.017818
+PerthAirport        0.017787
+Bendigo             0.017630
+Richmond            0.017568
+WaggaWagga          0.016815
+Townsville          0.016281
+PearceRAAF          0.015842
+SalmonGums          0.014807
+Moree               0.012360
+Cobar               0.012109
+Mildura             0.010258
+Katherine           0.008313
+AliceSprings        0.007654
+Nhil                0.007592
+Woomera             0.006337
+Uluru               0.003639
+Name: proportion, dtype: float64
+INFO:root:No Rain
+INFO:root:Location
+Canberra            0.025282
+Woomera             0.025273
+AliceSprings        0.025264
+Mildura             0.024294
+Cobar               0.023587
+Perth               0.023097
+Townsville          0.022789
+SalmonGums          0.022508
+Bendigo             0.022408
+Sydney              0.022408
+Moree               0.022300
+Brisbane            0.022227
+PerthAirport        0.022136
+WaggaWagga          0.022118
+Tuggeranong         0.022028
+Hobart              0.022000
+Nuriootpa           0.021846
+Adelaide            0.021774
+Albury              0.021692
+Richmond            0.021674
+Penrith             0.021475
+Sale                0.021366
+MelbourneAirport    0.021357
+BadgerysCreek       0.021257
+Darwin              0.021212
+Launceston          0.021112
+Wollongong          0.020577
+Watsonia            0.020496
+PearceRAAF          0.020459
+Ballarat            0.020369
+SydneyAirport       0.020224
+Newcastle           0.020160
+GoldCoast           0.019988
+NorahHead           0.019227
+Albany              0.019163
+MountGambier        0.019127
+MountGinini         0.018927
+CoffsHarbour        0.018891
+Witchcliffe         0.018791
+NorfolkIsland       0.018538
+Cairns              0.018474
+Dartmoor            0.018320
+Portland            0.017232
+Walpole             0.016951
+Williamtown         0.016797
+Melbourne           0.016308
+Uluru               0.012736
+Nhil                0.012029
+Katherine           0.011730
+Name: proportion, dtype: float64

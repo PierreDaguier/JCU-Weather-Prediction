@@ -4,6 +4,9 @@ model.joblib
 columns.joblib
 model_old.joblib
 columns_old.joblib
+model(1).joblib
+columns(1).joblib
+imputer.joblib
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies

@@ -4,8 +4,8 @@ import pandas as pd
 import joblib
 
 # Load model and column names
-model = joblib.load('model_old.joblib')
-columns = joblib.load('columns_old.joblib')
+model = joblib.load('model(1).joblib')
+columns = joblib.load('columns(1).joblib')
 
 # Use command line arguments for input values
 data = {
@@ -34,28 +34,28 @@ data = {
 
 }
 # data = {
-#     'Date'          :['2023-05-06'],
+#     'Date'          :['2015-12-6'],
 #     'Location'      :['Sydney'],
-#     'MinTemp'       :[20.0],
-#     'MaxTemp'       :[30.0],
-#     'Rainfall'      :[0.0],
-#     'Evaporation'   :[5.0],
-#     'Sunshine'      :[10.0],
+#     'MinTemp'       :[20.7],
+#     'MaxTemp'       :[24.6],
+#     'Rainfall'      :[6.0],
+#     'Evaporation'   :[5.4],
+#     'Sunshine'      :[1.8],
 #     'WindGustDir'   :['NE'],
-#     'WindGustSpeed' :[30.0],
+#     'WindGustSpeed' :[31.0],
 #     'WindDir9am'    :['NE'], 
-#     'WindDir3pm'    :['NE'], 
-#     'WindSpeed9am'  :[10.0],
-#     'WindSpeed3pm'  :[15.0],
-#     'Humidity9am'   :[60.0],
-#     'Humidity3pm'   :[40.0],
-#     'Pressure9am'   :[1000.0],
-#     'Pressure3pm'   :[1000.0], 
-#     'Cloud9am'      :[5.0], 
-#     'Cloud3pm'      :[3.0],
-#     'Temp9am'       :[22.0], 
-#     'Temp3pm'       :[28.0], 
-#     'RainToday'     :['No'], 
+#     'WindDir3pm'    :['ENE'], 
+#     'WindSpeed9am'  :[15.0],
+#     'WindSpeed3pm'  :[13.0],
+#     'Humidity9am'   :[89.0],
+#     'Humidity3pm'   :[91.0],
+#     'Pressure9am'   :[1010.5],
+#     'Pressure3pm'   :[1004.2], 
+#     'Cloud9am'      :[8], 
+#     'Cloud3pm'      :[8],
+#     'Temp9am'       :[15.9], 
+#     'Temp3pm'       :[17.0], 
+#     'RainToday'     :['Yes'], 
 # }
 # Transform the input to dataframe
 df = pd.DataFrame(data)

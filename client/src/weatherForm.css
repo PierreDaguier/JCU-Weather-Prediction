@@ -1,0 +1,13 @@
+.row {
+    height: 50vh;
+    width: 180vh;
+  }
+  
+.slider {
+    height: 35vh;
+}
+
+.button {
+    height: 6vh;
+    width: 12vh;
+}

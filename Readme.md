@@ -39,8 +39,12 @@ Push 5 (05/07/2023):
  - Changed model training environment to Google Colab
 * Added few sliders for test purpose on front-end
 * Create a whole new analyze folder, it contains many scripts made to have data about the dataset
-* output.pdf, output.txt is the result of anayzeTrendsDataset.py, it gives important insight about the weatherdataset.
+* output.pdf, output.txt is the result of analyzeTrendsDataset.py, it gives important insight about the weatherdataset.
 
+Push 6 (06/07/2023)
+* Front End improved with form contained in grid, add all sliders
+* New model is in current development (RandomModelClassifier balancing, parameters tuning and cross-validation scoring is now F1)
+* modelTesting has been adapted to new model 
 ## About dataset used
 
 > Observations were drawn from numerous weather stations. The daily observations are available from http://www.bom.gov.au/climate/data.

@@ -24,15 +24,20 @@ function App() {
   
     return (
       <div className="App">
-        <h1>Weather Predictor</h1>
+        
+        <h1>Just Curious University</h1>
         <WeatherForm onFormSubmit={handleFormSubmit} />
-      </div>
+        </div>
+      
     );
   };
 
   return (
     <div className="App">
-      <h1>Weather Predictor</h1>
+      <div className="title-container">
+        <img src="/JCU.png" alt="Logo" className="logo" />
+        <h1>Just Curious University</h1>
+      </div>
       <WeatherForm onFormSubmit={handleFormSubmit} />
     </div>
   );

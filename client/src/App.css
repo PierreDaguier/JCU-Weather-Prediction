@@ -1,5 +1,30 @@
+:root {
+  --primary-color: #e2a800;
+  --secondary-color:#7cbaf7;
+  --third-color:#0d73ba;
+  --text-navbar:#53565a;
+}
+
 .App {
   text-align: center;
+  font-family: 'Libre Baskerville', serif;
+}
+
+.title-container {
+  margin-left: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.logo {
+  margin-right: 15px;  /* ajustez la marge comme vous le souhaitez */
+  height: 70px;  /* ajustez la taille comme vous le souhaitez */
+  border-radius: 20%; /* arrondit les bords de l'image */
+}
+
+.site-layout-background {
+  font-family: 'Open Sans', sans-serif !important;
 }
 
 .App-logo {
@@ -13,8 +38,31 @@
   }
 }
 
+.button {
+  height: 8vh;
+  width: 15vh;
+  font-size: 20px;
+  background-color:var(--third-color)
+}
+
+.navbar {
+  background-color: #53565a;
+  color: white;
+  font-family: 'Playfair Display', serif;
+}
+
+.sliderUnit {
+  height: 35vh;
+  width: 15vh;
+}
+
+
+.dropdown_col {
+  width: 30vh;
+}
+
 .App-header {
-  background-color: #282c34;
+  background-color: var(--third-color);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -28,6 +76,13 @@
   color: #61dafb;
 }
 
+.custom-card {
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 15px; 
+
+}
+
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -35,4 +90,33 @@
   to {
     transform: rotate(360deg);
   }
+}
+.title{
+  font-family: 'Playfair Display', serif;  
+}
+
+.custom-card-result {
+  border-radius: 15px;
+  box-shadow: 0px 2px 10px rgba(0,0,0,0.15);
+  border: none;
+  transition: all 0.3s ease;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.custom-card-result:hover {
+  box-shadow: 0px 5px 20px rgba(0,0,0,0.2);
+  transform: scale(1.03);
+}
+.video {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -1;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  opacity: 0.5;  
 }

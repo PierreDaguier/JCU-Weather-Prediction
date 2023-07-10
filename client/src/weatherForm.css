@@ -1,13 +1,15 @@
-.row {
-    height: 50vh;
-    width: 180vh;
-  }
-  
-.slider {
-    height: 35vh;
+.button {
+    height: 8vh;
+    width: 15vh;
+    font-size: 20px;
 }
 
-.button {
-    height: 6vh;
-    width: 12vh;
+.sliderUnit {
+    height: 35vh;
+    width: 15vh;
+}
+
+
+.dropdown_col {
+    width: 30vh;
 }

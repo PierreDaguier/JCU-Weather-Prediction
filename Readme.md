@@ -45,6 +45,13 @@ Push 6 (06/07/2023)
 * Front End improved with form contained in grid, add all sliders
 * New model is in current development (RandomModelClassifier balancing, parameters tuning and cross-validation scoring is now F1)
 * modelTesting has been adapted to new model 
+
+Push 7 (10/07/2023)
+* New model trained ( logistic regression model)
+* Front-end done
+* Investigate script added to test accuracy
+* testModelV4.py gives model performance
+* 
 ## About dataset used
 
 > Observations were drawn from numerous weather stations. The daily observations are available from http://www.bom.gov.au/climate/data.

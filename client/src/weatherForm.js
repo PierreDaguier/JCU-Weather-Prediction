@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
-
-import { Card, Layout, Menu, Form, Button, Slider, Select, Typography, Row, Col } from 'antd';
+import Navbar from './navbar';
+import { Card, Layout, Form, Button, Slider, Select, Typography, Row, Col } from 'antd';
 
 import './App.css'
 const { Option } = Select;
@@ -161,15 +161,7 @@ const day = ('0' + dateTime.getDate()).slice(-2);
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap');
 </style> 
-<Header style={{ position: 'fixed', zIndex: 1, width: '100%' }} >
-  
-    
-    
-    <Menu theme="dark" className="navbar" mode="horizontal" defaultSelectedKeys={['1']}>
-        <Menu.Item key="1">Weather Prediction</Menu.Item>
-        <Menu.Item key="2">Documentation</Menu.Item>
-    </Menu>
-</Header>
+
 <Content className="site-layout" style={{ padding: '0 50px', marginTop: 64 }}>
   <div className="site-layout-background" style={{ padding: 24, minHeight: 380 }}>
   <Card className="custom-card">

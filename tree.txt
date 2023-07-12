@@ -1,0 +1,57 @@
+.
+├── analysis
+│   ├── analyzeAccuracy.py
+│   ├── analyzeDataRepartition.py
+│   ├── analyzeDataset.py
+│   ├── analyzeTrendsDataset.py
+│   ├── ModelAnalysis.py
+│   ├── output.pdf
+│   └── output.txt
+├── client
+│   ├── node_modules
+│   ├── package.json
+│   ├── package-lock.json
+│   ├── public
+│   └── src
+├── columns.joblib
+├── columns_types.py
+├── columnsv2.joblib
+├── columnsv3.joblib
+├── columnsv4.joblib
+├── data
+│   └── weatherAUS.csv
+├── data2.log
+├── data3.log
+├── data.json
+├── data.log
+├── env
+│   ├── bin
+│   ├── include
+│   ├── lib
+│   ├── lib64 -> lib
+│   ├── pyvenv.cfg
+│   └── share
+├── go.mod
+├── go.sum
+├── imputer.joblib
+├── imputerv3.joblib
+├── imputerv4.joblib
+├── investigateAccuracy.py
+├── main.go
+├── model.joblib
+├── model_old.joblib
+├── model_old.py
+├── model.py
+├── modelTesting.py
+├── modelv2.joblib
+├── modelv3.joblib
+├── modelv4.joblib
+├── modelv4.py
+├── predict.py
+├── Readme.md
+├── scalerv3.joblib
+├── scalerv4.joblib
+├── testModelV4.py
+└── tree.txt
+
+12 directories, 42 files

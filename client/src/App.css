@@ -5,6 +5,8 @@
   --text-navbar:#53565a;
 }
 
+
+  
 .App {
   text-align: center;
   font-family: 'Libre Baskerville', serif;
@@ -79,6 +81,19 @@
 .custom-card {
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 15px; 
+  
+}
+
+.custom-content {
+  background: rgba(255, 255, 255, 0.5) !important; /* Couleur de fond blanche avec 50% d'opacité */
+  border-radius: 15px;
+  margin-top: 64px; /* Bords arrondis */
+}
+
+.menu .menu-item {
+  background: transparent;
+  border: 1px solid white !important;
+  font-family: 'Playfair Display', serif;
 
 }
 

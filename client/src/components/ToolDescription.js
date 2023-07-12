@@ -1,19 +1,8 @@
 import React from 'react';
 import { Typography, List, Row, Col } from 'antd';
-import { useEffect, useState } from 'react';
-import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 const { Title, Paragraph } = Typography;
 
 
-
-
-const mapStyles = {        
-  height: "50vh",
-  width: "100%"};
-
-  const defaultCenter = {
-    lat: -25.3455, lng: 131.0369 
-  }
 
   const locations = [
     { name: "Albury", lat: -36.072596 , lng: 146.909419 },

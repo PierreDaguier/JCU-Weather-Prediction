@@ -87,3 +87,15 @@ The React application requires a reachable prediction API.
 3. Trigger a new deploy.
 
 Without `REACT_APP_API_URL`, production builds cannot call the prediction API.
+
+## Deploy backend on Render
+This repository now includes `Dockerfile` and `render.yaml` for the API service.
+
+1. In Render, create a new service from this GitHub repository.
+2. Render detects `render.yaml` and provisions `jcu-weather-api`.
+3. After deploy, copy the backend URL (example: `https://jcu-weather-api.onrender.com`).
+4. In Netlify, set `REACT_APP_API_URL` to that backend URL.
+5. Redeploy Netlify.
+
+Optional hardening:
+- set `ALLOWED_ORIGIN=https://your-netlify-site.netlify.app` in Render environment variables.

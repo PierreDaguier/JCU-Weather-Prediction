@@ -1,0 +1,13 @@
+[build]
+  base = "client"
+  command = "npm run build"
+  publish = "build"
+
+[build.environment]
+  NODE_VERSION = "20"
+  PYTHON_VERSION = "3.11"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

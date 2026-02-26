@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
-import Navbar from './navbar';
 import { Card, Layout, Form, Button, Slider, Select, Typography, Row, Col } from 'antd';
 
 import './App.css'
 const { Option } = Select;
-const { Header, Content, Footer } = Layout;
+const { Content, Footer } = Layout;
 const { Title } = Typography;
 
 

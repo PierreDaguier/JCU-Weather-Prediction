@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Navbar from './navbar';
-import { Card, Layout, Select, Typography, Menu } from 'antd';
+import { Card, Layout, Menu } from 'antd';
 
 import Introduction from './components/Introduction';
 import ToolDescription from './components/ToolDescription';
@@ -9,10 +8,7 @@ import AboutPredictionModel from './components/AboutPredictionModel';
 import TechnicalDescription from './components/TechnicalDescription';
 
 import './App.css'
-const { Option } = Select;
-const { Header, Content, Footer, Sider } = Layout;
-const { Title } = Typography;
-const { SubMenu } = Menu;
+const { Content, Sider } = Layout;
 
 function Documentation() {
   const [videoSrc, setVideoSrc] = useState("/default-background.mp4");

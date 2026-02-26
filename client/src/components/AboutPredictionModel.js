@@ -1,6 +1,6 @@
 import React from 'react';
 import { Typography } from 'antd';
-const { Title, Paragraph } = Typography;
+const { Title } = Typography;
 
 
 function AboutPredictionModel() {
@@ -12,10 +12,10 @@ function AboutPredictionModel() {
       <h2>Data Loading</h2>
       <pre style={{ whiteSpace: 'pre-wrap', wordWrap: 'break-word' }}>
         <code>
-          // Load data
+          # Load data
           df = pd.read_csv('/content/drive/My Drive/weatherAUS.csv', na_values='NA')
           
-          // Convert dates to ordinal (numeric) form
+          # Convert dates to ordinal (numeric) form
           df['Date'] = pd.to_datetime(df['Date']).apply(lambda date: date.toordinal())
         </code>
       </pre>
@@ -24,7 +24,7 @@ function AboutPredictionModel() {
       <h2>Missing Data Imputation</h2>
       <pre style={{ whiteSpace: 'pre-wrap', wordWrap: 'break-word' }}>
         <code>
-          // Impute missing data
+          # Impute missing data
           imputer = KNNImputer(n_neighbors=5)
           num_cols = df.select_dtypes(include=['int64', 'float64']).columns
           df[num_cols] = imputer.fit_transform(df[num_cols])
@@ -35,7 +35,7 @@ function AboutPredictionModel() {
       <h2>Feature Scaling</h2>
       <pre style={{ whiteSpace: 'pre-wrap', wordWrap: 'break-word' }}>
         <code>
-          // Standardize the features
+          # Standardize the features
           scaler = StandardScaler()
           df[num_cols] = scaler.fit_transform(df[num_cols])
         </code>
@@ -45,7 +45,7 @@ function AboutPredictionModel() {
       <h2>Encoding Categorical Data</h2>
       <pre style={{ whiteSpace: 'pre-wrap', wordWrap: 'break-word' }}>
         <code>
-          // Encode categorical data
+          # Encode categorical data
           df = pd.get_dummies(df)
         </code>
       </pre>
@@ -54,7 +54,7 @@ function AboutPredictionModel() {
       <h2>Data Splitting</h2>
       <pre style={{ whiteSpace: 'pre-wrap', wordWrap: 'break-word' }}>
         <code>
-          // Split data with stratification
+          # Split data with stratification
           X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
         </code>
       </pre>
@@ -63,7 +63,7 @@ function AboutPredictionModel() {
       <h2>Handling Class Imbalance</h2>
       <pre style={{ whiteSpace: 'pre-wrap', wordWrap: 'break-word' }}>
         <code>
-          // Apply SMOTE to oversample the minority class
+          # Apply SMOTE to oversample the minority class
           sm = SMOTE(random_state=42)
           X_train, y_train = sm.fit_resample(X_train, y_train)
         </code>
@@ -76,7 +76,7 @@ function AboutPredictionModel() {
         {`
           model = LogisticRegression(max_iter=1000)
 
-          // Model parameter tuning
+          # Model parameter tuning
           param_grid = {
               "C": [0.1, 1, 10, 100],
               "solver": ['newton-cg', 'lbfgs', 'liblinear', 'sag', 'saga'],
@@ -86,7 +86,7 @@ function AboutPredictionModel() {
           CV_lr.fit(X_train, y_train)
           print('Best parameters:', CV_lr.best_params_)
 
-          // Use the best model from grid search for further steps
+          # Use the best model from grid search for further steps
           best_model = CV_lr.best_estimator_
 
           `}
@@ -97,16 +97,16 @@ function AboutPredictionModel() {
       <h2>Model Evaluation</h2>
       <pre style={{ whiteSpace: 'pre-wrap', wordWrap: 'break-word' }}>
         <code>
-          // Model evaluation
+          # Model evaluation
           accuracy = best_model.score(X_test, y_test)
           with open('/content/drive/My Drive/accuracy_logistic.txt', 'w') as f:
               f.write('Précision du modèle: ' + str(accuracy))
 
-          // Cross Validation
+          # Cross Validation
           scores = cross_val_score(best_model, X_test, y_test, cv=5, scoring='f1')
           print("Accuracy: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() * 2))
 
-          // Confusion Matrix
+          # Confusion Matrix
           Matrice de confusion: [[22295    422]
                                 [    51   6324]]
         </code>
@@ -120,12 +120,12 @@ function AboutPredictionModel() {
       
       <h2>ROC Curve</h2>
       <p>The ROC (Receiver Operating Characteristic) curve is a plot that illustrates the diagnostic ability of a binary classifier as its discrimination threshold is varied. The model achieved an AUC (Area Under Curve) of 0.9979, indicating excellent performance. The closer the AUC is to 1, the better the model's performance.</p>
-      <img src='/roc_curve_logistic.png'></img>
+      <img src='/roc_curve_logistic.png' alt='ROC curve for logistic regression model' />
       
       <h2>Model Saving</h2>
       <pre style={{ whiteSpace: 'pre-wrap', wordWrap: 'break-word' }}>
         <code>
-          // Save the model
+          # Save the model
           joblib.dump(best_model, '/content/drive/My Drive/modelv4.joblib')
           joblib.dump(imputer, '/content/drive/My Drive/imputerv4.joblib')
           joblib.dump(scaler, '/content/drive/My Drive/scalerv4.joblib')

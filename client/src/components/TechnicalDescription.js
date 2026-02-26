@@ -1,7 +1,7 @@
 import React from 'react';
 import { Typography } from 'antd';
 
-const { Title, Paragraph } = Typography;
+const { Title } = Typography;
 
 function TechnicalDescription() {
   return (

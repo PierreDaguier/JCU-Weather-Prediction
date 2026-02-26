@@ -1,6 +1,6 @@
 import React from 'react';
-import { Typography, Space, List, Anchor } from 'antd';
-const { Title, Paragraph, Text } = Typography;
+import { Typography, List, Anchor } from 'antd';
+const { Title, Paragraph } = Typography;
 const { Link } = Anchor;
 
 function Introduction() {

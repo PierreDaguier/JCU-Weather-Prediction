@@ -292,20 +292,43 @@ const getTodayISODate = () => {
   return `${year}-${month}-${day}`;
 };
 
+const normalizeApiBase = (value) => (value ? value.replace(/\/+$/, '') : '');
+
+const getApiBase = () => {
+  const configuredUrl = normalizeApiBase(process.env.REACT_APP_API_URL);
+
+  if (configuredUrl) {
+    return configuredUrl;
+  }
+
+  if (process.env.NODE_ENV === 'development') {
+    return 'http://localhost:8080';
+  }
+
+  return '';
+};
+
 function WeatherForm() {
   const [form] = Form.useForm();
   const [prediction, setPrediction] = useState(null);
   const [requestError, setRequestError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const apiBase = useMemo(
-    () =>
-      process.env.REACT_APP_API_URL ||
-      (process.env.NODE_ENV === 'development' ? 'http://localhost:8080' : ''),
-    []
+  const apiBase = useMemo(() => getApiBase(), []);
+  const predictionEndpoint = useMemo(
+    () => (apiBase ? `${apiBase}/predict` : ''),
+    [apiBase]
   );
 
   const submitForm = async (values) => {
+    if (!predictionEndpoint) {
+      setPrediction(null);
+      setRequestError(
+        'Prediction API not configured. Set REACT_APP_API_URL in Netlify environment variables and redeploy.'
+      );
+      return;
+    }
+
     setIsSubmitting(true);
     setRequestError('');
 
@@ -325,7 +348,7 @@ function WeatherForm() {
     };
 
     try {
-      const response = await fetch(`${apiBase}/predict`, {
+      const response = await fetch(predictionEndpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
@@ -333,6 +356,11 @@ function WeatherForm() {
 
       if (!response.ok) {
         throw new Error(`Prediction request failed with status ${response.status}`);
+      }
+
+      const contentType = response.headers.get('content-type') || '';
+      if (!contentType.includes('application/json')) {
+        throw new Error('Prediction endpoint did not return JSON.');
       }
 
       const result = await response.json();
@@ -344,8 +372,10 @@ function WeatherForm() {
       setPrediction(normalized);
     } catch (error) {
       setPrediction(null);
+      const details =
+        error instanceof Error ? ` Details: ${error.message}` : '';
       setRequestError(
-        'Unable to fetch prediction. Verify the API URL and backend status, then retry.'
+        `Unable to fetch prediction. Verify backend status and REACT_APP_API_URL.${details}`
       );
       console.error(error);
     } finally {

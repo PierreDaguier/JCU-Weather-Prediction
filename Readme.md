@@ -77,3 +77,13 @@
 5. Navigate to the 'client' directory
 6. Install necessary npm packages (`npm install`)
 7. Start the project (`npm run start`)
+
+## Production setup (Netlify front-end + external API)
+The React application requires a reachable prediction API.
+
+1. Deploy the backend service so `/predict` is publicly reachable.
+2. In Netlify project settings, add environment variable:
+   - `REACT_APP_API_URL=https://your-backend-domain`
+3. Trigger a new deploy.
+
+Without `REACT_APP_API_URL`, production builds cannot call the prediction API.

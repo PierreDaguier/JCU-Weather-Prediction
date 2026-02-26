@@ -1,96 +1,80 @@
-import React, { useState, useEffect } from 'react';
-import { Card, Layout, Menu } from 'antd';
+import React, { useMemo, useState } from 'react';
+import { Card } from 'antd';
 
-import Introduction from './components/Introduction';
-import ToolDescription from './components/ToolDescription';
 import AboutDataset from './components/AboutDataset';
 import AboutPredictionModel from './components/AboutPredictionModel';
+import Introduction from './components/Introduction';
 import TechnicalDescription from './components/TechnicalDescription';
+import ToolDescription from './components/ToolDescription';
 
-import './App.css'
-const { Content, Sider } = Layout;
+const sections = [
+  {
+    key: 'introduction',
+    label: 'Introduction',
+    summary: 'Context, dataset source and roadmap',
+    component: Introduction
+  },
+  {
+    key: 'tool',
+    label: 'Tool Description',
+    summary: 'Input features and interpretation',
+    component: ToolDescription
+  },
+  {
+    key: 'dataset',
+    label: 'About Dataset',
+    summary: 'Coverage, variables and distributions',
+    component: AboutDataset
+  },
+  {
+    key: 'model',
+    label: 'Prediction Model',
+    summary: 'Training pipeline and evaluation',
+    component: AboutPredictionModel
+  },
+  {
+    key: 'technical',
+    label: 'Technical Description',
+    summary: 'Architecture and system flow',
+    component: TechnicalDescription
+  }
+];
 
 function Documentation() {
-  const [videoSrc, setVideoSrc] = useState("/default-background.mp4");
   const [current, setCurrent] = useState('introduction');
-  // Utilisation de setVideoSrc dans un effet
-  useEffect(() => {
-    setVideoSrc("/default-background.mp4");
-  }, []); // Les crochets vides indiquent que cet effet ne dépend d'aucune variable et ne sera exécuté qu'au montage du composant.
 
-  const handleClick = e => {
-    console.log('click ', e);
-    setCurrent(e.key);
-  };
+  const selectedSection = useMemo(
+    () => sections.find((item) => item.key === current) || sections[0],
+    [current]
+  );
+
+  const ActiveSection = selectedSection.component;
 
   return (
-    <div>
-      <Layout style={{background:'transparent'}}>
-        <div className='body'>
-               <video key={videoSrc} autoPlay loop muted className='video' src={videoSrc} type="video/mp4" />
-           <style>
-             @import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Playfair+Display&display=swap');
-           </style> 
-           <style>
-             @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap');
-           </style> 
-        <div style={{padding: 24}}> 
-        <Card className='custom-content menu' style={{ marginTop: 64, paddingLeft:60 }}>
-          <Sider width={1} className="site-layout-background">
-            <Menu
-                theme='dark'
-              mode="inline"
-              onClick={handleClick}
-              selectedKeys={[current]}
-              style={{ 
-                position:'fixed',
-                width: '24vh',
-                marginLeft:'5px',
-                marginTop:'30px', 
-                borderRight: 0,
-                borderRadius:10, 
-                backgroundColor: 'rgba(13, 115, 186, 0.9)' , 
-                color:'white',
-                fontFamily: "Open Sans",
-                fontSize: 16,
-                
-              }}
-            >
-              <Menu.Item style={{border: '1px solid white', fontFamily: 'Playfair Display', height: '50px', marginTop:'5px'}} key="introduction">Introduction</Menu.Item>
-              <Menu.Item style={{border: '1px solid white', fontFamily: 'Playfair Display', height: '50px'}} key="tool">Tool Description</Menu.Item>
-              <Menu.Item style={{border: '1px solid white',fontFamily: 'Playfair Display', height: '50px'}} key="dataset">About Dataset</Menu.Item>
-              <Menu.Item style={{border: '1px solid white',fontFamily: 'Playfair Display', height: '50px'}} key="model">About Prediction Model</Menu.Item>
-              <Menu.Item style={{border: '1px solid white',fontFamily: 'Playfair Display', height: '50px'}} key="technical">Technical Description</Menu.Item>
-            </Menu>
-          </Sider>
-          <Layout style={{ background: 'transparent', padding: '0 24px 24px' }}>
-            
-            <Content
-            className="site-layout-background"
-            style={{
-            padding: 24,
-            margin: 0,
-            minHeight: 280,
-            }}
-            >
-            {(() => {
-            switch (current) {
-                case 'introduction': return <Introduction />;
-                case 'tool': return <ToolDescription />;
-                case 'dataset': return <AboutDataset />;
-                case 'model': return <AboutPredictionModel />;
-                case 'technical': return <TechnicalDescription />;
-                default: return null;
-            }
-            })()}
-            </Content>
-            
-          </Layout>
+    <section className="surface-card docs-shell">
+      <aside className="docs-sidebar" role="tablist" aria-label="Documentation sections">
+        {sections.map((section) => (
+          <button
+            key={section.key}
+            type="button"
+            role="tab"
+            aria-selected={section.key === selectedSection.key}
+            className={`docs-tab ${section.key === selectedSection.key ? 'is-active' : ''}`}
+            onClick={() => setCurrent(section.key)}
+          >
+            <span className="docs-tab-title">{section.label}</span>
+            <span className="docs-tab-summary">{section.summary}</span>
+          </button>
+        ))}
+      </aside>
+
+      <div className="docs-main">
+        <Card bordered={false} className="docs-content-card">
+          <p className="content-kicker">Documentation</p>
+          <ActiveSection />
         </Card>
-        </div>
-        </div>
-      </Layout>
-    </div>
+      </div>
+    </section>
   );
 }
 

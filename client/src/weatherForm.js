@@ -1,666 +1,545 @@
-import React, { useState } from 'react';
-import { useEffect } from 'react';
-import { Card, Layout, Form, Button, Slider, Select, Typography, Row, Col } from 'antd';
+import React, { useMemo, useState } from 'react';
+import { Alert, Button, Card, Col, Form, Row, Select, Slider, Typography } from 'antd';
 
-import './App.css'
-const { Option } = Select;
-const { Content, Footer } = Layout;
-const { Title } = Typography;
-
-
+const { Title, Paragraph, Text } = Typography;
 
 const localisations = [
-  "Albury",
-  "BadgerysCreek", 
-  "Cobar", 
-  "CoffsHarbour",
-  "Moree", 
-  "Newcastle", 
-  "NorahHead", 
-  "NorfolkIsland", 
-  "Penrith", 
-  "Richmond", 
-  "Sydney", 
-  "SydneyAirport", 
-  "WaggaWagga", 
-  "Williamtown", 
-  "Wollongong",
-  "Canberra", 
-  "Tuggeranong", 
-  "MountGinini", 
-  "Ballarat", 
-  "Bendigo", 
-  "Sale", 
-  "MelbourneAirport", 
-  "Melbourne", 
-  "Mildura", 
-  "Nhil", 
-  "Portland",
-  "Watsonia", 
-  "Dartmoor", 
-  "Brisbane", 
-  "Cairns", 
-  "GoldCoast", 
-  "Townsville", 
-  "Adelaide", 
-  "MountGambier", 
-  "Nuriootpa", 
-  "Woomera", 
-  "Albany", 
-  "Witchcliffe", 
-  "PearceRAAF", 
-  "PerthAirport", 
-  "Perth", 
-  "SalmonGums", 
-  "Walpole", 
-  "Hobart", 
-  "Launceston", 
-  "AliceSprings",
-  "Darwin", 
-  "Katherine", 
-  "Uluru"
-]
+  'Albury',
+  'BadgerysCreek',
+  'Cobar',
+  'CoffsHarbour',
+  'Moree',
+  'Newcastle',
+  'NorahHead',
+  'NorfolkIsland',
+  'Penrith',
+  'Richmond',
+  'Sydney',
+  'SydneyAirport',
+  'WaggaWagga',
+  'Williamtown',
+  'Wollongong',
+  'Canberra',
+  'Tuggeranong',
+  'MountGinini',
+  'Ballarat',
+  'Bendigo',
+  'Sale',
+  'MelbourneAirport',
+  'Melbourne',
+  'Mildura',
+  'Nhil',
+  'Portland',
+  'Watsonia',
+  'Dartmoor',
+  'Brisbane',
+  'Cairns',
+  'GoldCoast',
+  'Townsville',
+  'Adelaide',
+  'MountGambier',
+  'Nuriootpa',
+  'Woomera',
+  'Albany',
+  'Witchcliffe',
+  'PearceRAAF',
+  'PerthAirport',
+  'Perth',
+  'SalmonGums',
+  'Walpole',
+  'Hobart',
+  'Launceston',
+  'AliceSprings',
+  'Darwin',
+  'Katherine',
+  'Uluru'
+];
 
 const directions = [
-  "W", 
-  "WNW", 
-  "WSW", 
-  "NE", 
-  "NNW", 
-  "N", 
-  "NNE", 
-  "SW",
-  "nan",
-  "ENE",
-  "SSE",
-  "S", 
-  "NW",
-  "SE",
-  "ESE", 
-  "E", 
-  "SSW"
-]; 
+  'W',
+  'WNW',
+  'WSW',
+  'NE',
+  'NNW',
+  'N',
+  'NNE',
+  'SW',
+  'nan',
+  'ENE',
+  'SSE',
+  'S',
+  'NW',
+  'SE',
+  'ESE',
+  'E',
+  'SSW'
+];
 
-const dateTime = new Date();
-const year = dateTime.getFullYear();
-const month = ('0' + (dateTime.getMonth() + 1)).slice(-2); // Les mois commencent à 0 en JS, donc nous ajoutons 1
-const day = ('0' + dateTime.getDate()).slice(-2);
+const sliderMarks = (min, max, unit = '') => ({
+  [min]: `${min}${unit}`,
+  [max]: `${max}${unit}`
+});
 
+const metricGroups = [
+  {
+    title: 'Thermal & Water Balance',
+    description: 'Core temperature and moisture signals used by the model.',
+    fields: [
+      {
+        name: 'minTemp',
+        label: 'Min Temperature',
+        min: -10,
+        max: 50,
+        step: 0.1,
+        unit: '°C',
+        decimals: 1,
+        defaultValue: 12,
+        marks: sliderMarks(-10, 50, '°C')
+      },
+      {
+        name: 'maxTemp',
+        label: 'Max Temperature',
+        min: -10,
+        max: 50,
+        step: 0.1,
+        unit: '°C',
+        decimals: 1,
+        defaultValue: 23,
+        marks: sliderMarks(-10, 50, '°C')
+      },
+      {
+        name: 'temp9am',
+        label: 'Temperature at 9am',
+        min: -10,
+        max: 50,
+        step: 0.1,
+        unit: '°C',
+        decimals: 1,
+        defaultValue: 16,
+        marks: sliderMarks(-10, 50, '°C')
+      },
+      {
+        name: 'temp3pm',
+        label: 'Temperature at 3pm',
+        min: -10,
+        max: 50,
+        step: 0.1,
+        unit: '°C',
+        decimals: 1,
+        defaultValue: 22,
+        marks: sliderMarks(-10, 50, '°C')
+      },
+      {
+        name: 'rainfall',
+        label: 'Rainfall',
+        min: 0,
+        max: 400,
+        step: 1,
+        unit: 'mm',
+        defaultValue: 2,
+        marks: sliderMarks(0, 400, 'mm')
+      },
+      {
+        name: 'evaporation',
+        label: 'Evaporation',
+        min: 0,
+        max: 150,
+        step: 1,
+        unit: 'mm',
+        defaultValue: 5,
+        marks: sliderMarks(0, 150, 'mm')
+      },
+      {
+        name: 'sunshine',
+        label: 'Sunshine',
+        min: 0,
+        max: 15,
+        step: 0.5,
+        unit: 'h',
+        decimals: 1,
+        defaultValue: 7,
+        marks: sliderMarks(0, 15, 'h')
+      }
+    ]
+  },
+  {
+    title: 'Wind Dynamics',
+    description: 'Wind intensity captured at gust, 9am and 3pm checkpoints.',
+    fields: [
+      {
+        name: 'windGustSpeed',
+        label: 'Wind Gust Speed',
+        min: 0,
+        max: 100,
+        step: 1,
+        unit: 'km/h',
+        defaultValue: 35,
+        marks: sliderMarks(0, 100, 'km/h')
+      },
+      {
+        name: 'windSpeed9am',
+        label: 'Wind Speed at 9am',
+        min: 0,
+        max: 100,
+        step: 1,
+        unit: 'km/h',
+        defaultValue: 15,
+        marks: sliderMarks(0, 100, 'km/h')
+      },
+      {
+        name: 'windSpeed3pm',
+        label: 'Wind Speed at 3pm',
+        min: 0,
+        max: 100,
+        step: 1,
+        unit: 'km/h',
+        defaultValue: 20,
+        marks: sliderMarks(0, 100, 'km/h')
+      }
+    ]
+  },
+  {
+    title: 'Humidity, Pressure & Clouds',
+    description: 'Atmospheric conditions indicating rain probability trends.',
+    fields: [
+      {
+        name: 'humidity9am',
+        label: 'Humidity at 9am',
+        min: 0,
+        max: 100,
+        step: 1,
+        unit: '%',
+        defaultValue: 65,
+        marks: sliderMarks(0, 100, '%')
+      },
+      {
+        name: 'humidity3pm',
+        label: 'Humidity at 3pm',
+        min: 0,
+        max: 100,
+        step: 1,
+        unit: '%',
+        defaultValue: 52,
+        marks: sliderMarks(0, 100, '%')
+      },
+      {
+        name: 'pressure9am',
+        label: 'Pressure at 9am',
+        min: 990,
+        max: 1040,
+        step: 0.5,
+        unit: 'hPa',
+        decimals: 1,
+        defaultValue: 1016,
+        marks: sliderMarks(990, 1040, 'hPa')
+      },
+      {
+        name: 'pressure3pm',
+        label: 'Pressure at 3pm',
+        min: 990,
+        max: 1040,
+        step: 0.5,
+        unit: 'hPa',
+        decimals: 1,
+        defaultValue: 1013,
+        marks: sliderMarks(990, 1040, 'hPa')
+      },
+      {
+        name: 'cloud9am',
+        label: 'Cloud Cover at 9am',
+        min: 0,
+        max: 8,
+        step: 1,
+        unit: 'oktas',
+        defaultValue: 4,
+        marks: sliderMarks(0, 8)
+      },
+      {
+        name: 'cloud3pm',
+        label: 'Cloud Cover at 3pm',
+        min: 0,
+        max: 8,
+        step: 1,
+        unit: 'oktas',
+        defaultValue: 3,
+        marks: sliderMarks(0, 8)
+      }
+    ]
+  }
+];
 
-  function WeatherForm() {
-    const [form] = Form.useForm();
-    const [prediction, setPrediction] = useState(null);
+const metricFields = metricGroups.flatMap((group) => group.fields);
 
-  const [videoSrc, setVideoSrc] = useState("/default-background.mp4");
-    useEffect(() => {
+const initialMetricValues = metricFields.reduce((accumulator, field) => {
+  accumulator[field.name] = field.defaultValue;
+  return accumulator;
+}, {});
 
-      if (prediction === true) {
-        setVideoSrc("/rain-background.mp4");
-      } else if (prediction === false) {
-        setVideoSrc("/sunny-background.mp4");
-      } else {
-        setVideoSrc("/default-background.mp4");
+const initialValues = {
+  location: 'Sydney',
+  rainToday: 'No',
+  windGustDir: 'N',
+  windDir9am: 'N',
+  windDir3pm: 'N',
+  ...initialMetricValues
+};
+
+const getTodayISODate = () => {
+  const date = new Date();
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
+
+function WeatherForm() {
+  const [form] = Form.useForm();
+  const [prediction, setPrediction] = useState(null);
+  const [requestError, setRequestError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const apiBase = useMemo(
+    () =>
+      process.env.REACT_APP_API_URL ||
+      (process.env.NODE_ENV === 'development' ? 'http://localhost:8080' : ''),
+    []
+  );
+
+  const submitForm = async (values) => {
+    setIsSubmitting(true);
+    setRequestError('');
+
+    const numericPayload = metricFields.reduce((accumulator, field) => {
+      accumulator[field.name] = Number(values[field.name]);
+      return accumulator;
+    }, {});
+
+    const payload = {
+      date: getTodayISODate(),
+      location: values.location,
+      rainToday: values.rainToday,
+      windGustDir: values.windGustDir,
+      windDir9am: values.windDir9am,
+      windDir3pm: values.windDir3pm,
+      ...numericPayload
+    };
+
+    try {
+      const response = await fetch(`${apiBase}/predict`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      if (!response.ok) {
+        throw new Error(`Prediction request failed with status ${response.status}`);
       }
 
-    }, [prediction]);
-    useEffect(() => {
-      console.log("videoSrc changed:", videoSrc);
-    }, [videoSrc]);
-        
-    const submitForm = (values) => {
-        const payload = {
-            ...values,
-            date: `${year}-${month}-${day}`,
-            minTemp: parseFloat(values.minTemp),
-            maxTemp: parseFloat(values.maxTemp),
-            rainfall: parseFloat(values.rainfall),
-            evaporation: parseFloat(values.evaporation),
-            sunshine: parseFloat(values.sunshine),
-            windGustSpeed: parseFloat(values.windGustSpeed),
-            windDir9am: values.windDir9am,
-            windDir3pm: values.windDir3pm,
-            windSpeed9am: parseFloat(values.windSpeed9am),
-            windSpeed3pm: parseFloat(values.windSpeed3pm),
-            humidity9am: parseFloat(values.humidity9am),
-            humidity3pm: parseFloat(values.humidity3pm),
-            pressure9am: parseFloat(values.pressure9am),
-            pressure3pm: parseFloat(values.pressure3pm),
-            cloud9am: parseFloat(values.cloud9am),
-            cloud3pm: parseFloat(values.cloud3pm),
-            temp9am: parseFloat(values.temp9am),
-            temp3pm: parseFloat(values.temp3pm),
-          }
-        console.log(payload)
-      fetch("http://localhost:8080/predict", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      })
-        .then(response => response.json())
-        .then(data => setPrediction(data.result))
-        .catch(error => console.log(error));
-    
-      //form.resetFields();
-    };
+      const result = await response.json();
+      const normalized =
+        typeof result.result === 'boolean'
+          ? result.result
+          : ['true', 'yes', '1', 'rain'].includes(String(result.result).toLowerCase());
+
+      setPrediction(normalized);
+    } catch (error) {
+      setPrediction(null);
+      setRequestError(
+        'Unable to fetch prediction. Verify the API URL and backend status, then retry.'
+      );
+      console.error(error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
-
-    
-    <div>
-
-  <div>
-
-        
-
-<Layout style={{ background: 'transparent' }}>
-<div className='body'>
-<video key={videoSrc} autoPlay loop muted className='video' src={videoSrc} type="video/mp4" />
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Playfair+Display&display=swap');
-</style> 
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap');
-</style> 
-
-<Content className="site-layout" style={{ padding: '0 50px', marginTop: 64 }}>
-  <div className="site-layout-background" style={{ padding: 24, minHeight: 380 }}>
-  <Card className="custom-card">
-    <Title style={{ fontFamily: 'Playfair Display'}} level={2}>Weather Prediction Tool</Title>
-      <p style={{ fontFamily: 'Playfair Display'}}>This form uses machine learning to predict whether it will rain tomorrow based on the weather data you input.</p>
-      <Form onFinish={submitForm} layout="vertical" className="form" form={form}>
-        <Row  justify="start"
-              align="middle"
-        >
-          <div className="left_col">
-            <Col xxl={24} xl={24} lg={24} md={24} sm={24} xs={24}>  
-            <div>
-             <Row  className="row" 
-                   justify="start"
-                   align="middle"
-             >
-                
-              <Col xxl={8} xl={8} lg={8} md={12} sm={24} xs={24}>
-          <div className="dropdown_col">
-        
-        
-      <Form.Item label="Location" name="location" rules={[{ required: true }]}>
-        <Select>
-          {localisations.map(dir => <Option key={dir} value={dir}>{dir}</Option>)}
-        </Select>
-      </Form.Item>
-      
-      <Form.Item label="Rain Today" name="rainToday" rules={[{ required: true }]}>
-        <Select>
-          <Option value="Yes">Yes</Option>
-          <Option value="No">No</Option>
-        </Select>
-        </Form.Item>
-      
-      
-      
-      <Form.Item label="Wind Gust Direction" name="windGustDir" rules={[{ required: true }]}>
-        <Select>
-          {directions.map(dir => <Option key={dir} value={dir}>{dir}</Option>)}
-        </Select>
-      </Form.Item>
-      
-      
-      <Form.Item label="Wind Direction 9am" name="windDir9am" rules={[{ required: true }]}>
-        <Select>
-          {directions.map(dir => <Option key={dir} value={dir}>{dir}</Option>)}
-        </Select>
-      </Form.Item>
-      
-      
-      <Form.Item label="Wind Direction 3pm" name="windDir3pm" rules={[{ required: true }]}>
-        <Select>
-          {directions.map(dir => <Option key={dir} value={dir}>{dir}</Option>)}
-        </Select>
-      </Form.Item>
+    <section className="surface-card form-shell">
+      <div className="section-heading">
+        <p className="content-kicker">Prediction Console</p>
+        <Title level={2}>Rain Tomorrow Classifier</Title>
+        <Paragraph>
+          Enter the latest weather signals to estimate whether it will rain tomorrow.
+          The model combines thermal, humidity, pressure and wind indicators.
+        </Paragraph>
       </div>
-              </Col>
-      
-              <Col xxl={2} xl={2} lg={2} md={6} sm={8} xs={12}>
-                <Form.Item label="Min Temp (°C)" name="minTemp" rules={[{ required: true }]}>
-                  <div className="sliderUnit">
-                  <Slider 
-                    min={-10}
-                    max={50}
-                    onChange={(value) => form.setFieldsValue({ minTemp: value })}
-                    marks={{
-                      "-10": '-10',
-                      0: '0',
-                      10: '10',
-                      20: '20',
-                      30: '30',
-                      40: '40',
-                      50: '50'
-                    }}
-                    vertical
-                    className='slider'
-                  />
-                  </div>
-                </Form.Item>
-              </Col>
 
-              <Col xxl={2} xl={2} lg={2} md={6} sm={8} xs={12}>
-                <Form.Item label="Max Temp (°C)" name="maxTemp" rules={[{ required: true }]}>
-                <div className="sliderUnit">
-                <Slider
-                    min={-10}
-                    max={50}
-                    onChange={(value) => form.setFieldsValue({ maxTemp: value })}
-                    marks={{
-                      "-10": '-10',
-                      0: '0',
-                      10: '10',
-                      20: '20',
-                      30: '30',
-                      40: '40',
-                      50: '50'
-                    }}
-                    vertical
-                    className='slider'
-                  />
-                  </div>
-                </Form.Item>
-              </Col>
-              <Col xxl={2} xl={2} lg={2} md={6} sm={8} xs={12}>
-            <Form.Item label="Rainfall (mm)" name="rainfall" rules={[{ required: true }]}>
-            <div className="sliderUnit">
-            <Slider
-                min={0.0}
-                max={400.0}
-                onChange={(value) => form.setFieldsValue({ rainfall: value })}
-                marks={{
-                  0.0: '0',
-                  40.0: '40',
-                  80.0: '80',
-                  120.0: '120',
-                  160.0: '160',
-                  200.0: '200',
-                  240.0: '240',
-                  280.0: '280',
-                  320.0: '320',
-                  360.0: '360',
-                  400.0: '400' 
-                }}
-                vertical
-                className='slider'
-              />
-              </div>
-            </Form.Item>
-              </Col>
-              <Col xxl={2} xl={2} lg={2} md={6} sm={8} xs={12}>
-            <Form.Item label="Evaporation (mm)" name="evaporation" rules={[{ required: true }]}>
-            <div className="sliderUnit">
-            <Slider
-                min={0}
-                max={150}
-                onChange={(value) => form.setFieldsValue({ evaporation: value })}
-                marks={{
-                  0: '0',
-                  15: '15',
-                  30: '30',
-                  45: '45',
-                  60: '60',
-                  75: '75',
-                  90: '90',
-                  105: '105',
-                  120: '120',
-                  135: '135',
-                  150: '150'
-                }}
-                vertical
-                className='slider'
-              />
-              </div>
-            </Form.Item>
-              </Col>
-          
-              <Col xxl={2} xl={2} lg={2} md={6} sm={8} xs={12}>
-            <Form.Item label="Sunshine (h)" name="sunshine" rules={[{ required: true }]}>
-            <div className="sliderUnit">
-            <Slider
-                min={0.0}
-                max={15}
-                onChange={(value) => form.setFieldsValue({ sunshine: value })}
-                marks={{
-                  0: '0',
-                  1: '1',
-                  2: '2',
-                  3: '3',
-                  4: '4',
-                  5: '5',
-                  6: '6',
-                  7: '7',
-                  8: '8',
-                  9: '9',
-                  10: '10',
-                  11: '11',
-                  12: '12',
-                  13: '13',
-                  14: '14',
-                  15: '15'
-                }}
-                vertical
-                className='slider'
-              />
-              </div>
-            </Form.Item>
-              </Col>
-
-              <Col xxl={2} xl={2} lg={2} md={6} sm={8} xs={12}>
-                <Form.Item label="Wind Gust Speed (km/h)" name="windGustSpeed" rules={[{ required: true }]}>
-                <div className="sliderUnit">
-                <Slider
-                    min={0}
-                    max={100}
-                    onChange={(value) => form.setFieldsValue({ windGustSpeed: value })}
-                    marks={{
-                      0: '0',
-                      10: '10',
-                      20: '20',
-                      30: '30',
-                      40: '40',
-                      50: '50',
-                      60: '60',
-                      70: '70',
-                      80: '80',
-                      90: '90',
-                      100: '100'
-                    }}
-                    vertical
-                    className='slider'
-                  />
-                  </div>
-                </Form.Item>
-              </Col>
-              <Col xxl={2} xl={2} lg={2} md={6} sm={8} xs={12}>
-                    
-                <Form.Item label="Wind Speed 9am (km/h)" name="windSpeed9am" rules={[{ required: true }]}>
-                <div className="sliderUnit">
-                <Slider
-                    min={0}
-                    max={100}
-                    onChange={(value) => form.setFieldsValue({ windSpeed9am: value })}
-                    marks={{
-                      0: '0',
-                      10: '10',
-                      20: '20',
-                      30: '30',
-                      40: '40',
-                      50: '50',
-                      60: '60',
-                      70: '70',
-                      80: '80',
-                      90: '90',
-                      100: '100'
-                    }}
-                    vertical
-                    className='slider'
-                  />
-                  </div>
-                </Form.Item>
-              </Col>
-      
-            </Row>
-            <Row className="row" 
-                 justify="start"
-                 align="middle"
+      <Form
+        form={form}
+        layout="vertical"
+        className="weather-form"
+        initialValues={initialValues}
+        onFinish={submitForm}
+      >
+        <Card className="input-card" bordered={false}>
+          <Title level={4}>Location & Direction Inputs</Title>
+          <div className="form-top-grid">
+            <Form.Item
+              label="Location"
+              name="location"
+              rules={[{ required: true, message: 'Location is required.' }]}
             >
-              <Col xxl={2} xl={3} lg={3} md={6} sm={12} xs={24}>
+              <Select
+                showSearch
+                optionFilterProp="label"
+                options={localisations.map((location) => ({
+                  value: location,
+                  label: location
+                }))}
+              />
+            </Form.Item>
 
-    <Form.Item label="Wind Speed 3pm (km/h)" name="windSpeed3pm" rules={[{ required: true }]}>
-    <div className="sliderUnit">
-      <Slider
-        min={0}
-        max={100}
-        onChange={(value) => form.setFieldsValue({ windSpeed3pm: value })}
-        marks={{
-          0: '0',
-          10: '10',
-          20: '20',
-          30: '30',
-          40: '40',
-          50: '50',
-          60: '60',
-          70: '70',
-          80: '80',
-          90: '90',
-          100: '100'
-        }}
-        vertical
-        className='slider'
-      
-      />
-      </div>
-    </Form.Item>
-              </Col>
-      
-              <Col xxl={2} xl={3} lg={3} md={6} sm={12} xs={24}>
-      <Form.Item label="Humidity 9am" name="humidity9am" rules={[{ required: true }]}>
-      <div className="sliderUnit">
-      <Slider
-          min={0}
-          max={100}
-          onChange={(value) => form.setFieldsValue({ humidity9am: value })}
-          marks={{
-            0: '0%',
-            10: '10%',
-            20: '20%',
-            30: '30%',
-            40: '40%',
-            50: '50%',
-            60: '60%',
-            70: '70%',
-            80: '80%',
-            90: '90%',
-            100: '100%'
-          }}
-          vertical
-          className='slider'
-        />
-        </div>
-      </Form.Item>
-              </Col>
+            <Form.Item
+              label="Rain Today"
+              name="rainToday"
+              rules={[{ required: true, message: 'Please specify rain status for today.' }]}
+            >
+              <Select
+                options={[
+                  { value: 'Yes', label: 'Yes' },
+                  { value: 'No', label: 'No' }
+                ]}
+              />
+            </Form.Item>
 
-              <Col xxl={2} xl={3} lg={3} md={6} sm={12} xs={24}>
-      <Form.Item label="Humidity 3pm" name="humidity3pm" rules={[{ required: true }]}>
-      <div className="sliderUnit">
-      <Slider
-          min={0}
-          max={100}
-          onChange={(value) => form.setFieldsValue({ humidity3pm: value })}
-          marks={{
-            0: '0%',
-            10: '10%',
-            20: '20%',
-            30: '30%',
-            40: '40%',
-            50: '50%',
-            60: '60%',
-            70: '70%',
-            80: '80%',
-            90: '90%',
-            100: '100%'
-          }}
-          vertical
-          className='slider'
-        />
-        </div>
-      </Form.Item>
-              </Col>
-              <Col xxl={2} xl={3} lg={3} md={6} sm={12} xs={24}>
-      <Form.Item label="Pressure 9am (hPa)" name="pressure9am" rules={[{ required: true }]}>
-      <div className="sliderUnit">
-      <Slider
-          min={990}
-          max={1040}
-          onChange={(value) => form.setFieldsValue({ pressure9am: value })}
-          marks={{            
-            990: '990',
-            1000: '1000',
-            1010: '1010',
-            1020: '1020',
-            1030: '1030',
-            1040: '1040'
-          }}
-          vertical
-          className='slider'
-        />
-        </div>
-      </Form.Item>
-              </Col>
-              <Col xxl={2} xl={3} lg={3} md={6} sm={12} xs={24}>
-      <Form.Item label="Pressure 3pm (hPa)" name="pressure3pm" rules={[{ required: true }]}>
-      <div className="sliderUnit">
-      <Slider
-          min={990}
-          max={1040}
-          onChange={(value) => form.setFieldsValue({ pressure3pm: value })}
-          marks={{            
-            990: '990',
-            1000: '1000',
-            1010: '1010',
-            1020: '1020',
-            1030: '1030',
-            1040: '1040'
-          }}
-          vertical
-          className='slider'
-        />
-        </div>
-      </Form.Item>
-              </Col>
+            <Form.Item
+              label="Wind Gust Direction"
+              name="windGustDir"
+              rules={[{ required: true, message: 'Wind gust direction is required.' }]}
+            >
+              <Select
+                showSearch
+                optionFilterProp="label"
+                options={directions.map((direction) => ({
+                  value: direction,
+                  label: direction
+                }))}
+              />
+            </Form.Item>
 
-              <Col xxl={2} xl={3} lg={3} md={6} sm={12} xs={24}>
-      <Form.Item label="Cloud 9am (oktas)" name="cloud9am" rules={[{ required: true }]}>
-      <div className="sliderUnit">
-      <Slider
-          min={0}
-          max={8}
-          onChange={(value) => form.setFieldsValue({ cloud9am: value })}
-          marks={{
-            0: '0',
-            1: '1',
-            2: '2',
-            3: '3',
-            4: '4',
-            5: '5',
-            6: '6',
-            7: '7',
-            8: '8'
-          }}
-          vertical
-          className='slider'
-        />
-        </div>
-      </Form.Item>
-              </Col>
+            <Form.Item
+              label="Wind Direction at 9am"
+              name="windDir9am"
+              rules={[{ required: true, message: 'Wind direction at 9am is required.' }]}
+            >
+              <Select
+                showSearch
+                optionFilterProp="label"
+                options={directions.map((direction) => ({
+                  value: direction,
+                  label: direction
+                }))}
+              />
+            </Form.Item>
 
-              <Col xxl={2} xl={3} lg={3} md={6} sm={12} xs={24}>
-      <Form.Item label="Cloud 3pm (oktas)" name="cloud3pm" rules={[{ required: true }]}>
-      <div className="sliderUnit">
-      <Slider
-          min={0}
-          max={8}
-          onChange={(value) => form.setFieldsValue({ cloud3pm: value })}
-          marks={{
-            0: '0',
-            1: '1',
-            2: '2',
-            3: '3',
-            4: '4',
-            5: '5',
-            6: '6',
-            7: '7',
-            8: '8'
-          }}
-          vertical
-          className='slider'
-        />
-        </div>
-      </Form.Item>
-              </Col>
-              <Col xxl={2} xl={3} lg={3} md={6} sm={12} xs={24}>
-      <Form.Item label="Temp 9am (°C)" name="temp9am" rules={[{ required: true }]}>
-      <div className="sliderUnit">
-      <Slider
-          min={-10}
-          max={50}
-          onChange={(value) => form.setFieldsValue({ temp9am: value })}
-          marks={{
-            "-10": '-10',
-            0: '0',
-            10: '10',
-            20: '20',
-            30: '30',
-            40: '40',
-            50: '50'
-          }}
-          vertical
-          className='slider'
-        />
-        </div>
-      </Form.Item>
-              </Col>
-              <Col xxl={2} xl={3} lg={3} md={6} sm={12} xs={24}>
-      <Form.Item label="Temp 3pm (°C)" name="temp3pm" rules={[{ required: true }]}>
-      <div className="sliderUnit">
-      <Slider
-          min={-10}
-          max={50}
-          onChange={(value) => form.setFieldsValue({ temp3pm: value })}
-          marks={{
-            "-10": '-10',
-            0: '0',
-            10: '10',
-            20: '20',
-            30: '30',
-            40: '40',
-            50: '50'
-          }}
-          vertical
-          className='slider'
-        />
-        </div>
-      </Form.Item>
-              </Col>
+            <Form.Item
+              label="Wind Direction at 3pm"
+              name="windDir3pm"
+              rules={[{ required: true, message: 'Wind direction at 3pm is required.' }]}
+            >
+              <Select
+                showSearch
+                optionFilterProp="label"
+                options={directions.map((direction) => ({
+                  value: direction,
+                  label: direction
+                }))}
+              />
+            </Form.Item>
+          </div>
+        </Card>
+
+        {metricGroups.map((group) => (
+          <Card key={group.title} className="input-card metric-group-card" bordered={false}>
+            <div className="metric-group-header">
+              <Title level={4}>{group.title}</Title>
+              <Text>{group.description}</Text>
+            </div>
+
+            <Row gutter={[16, 16]}>
+              {group.fields.map((field) => (
+                <Col xs={24} sm={12} lg={8} key={field.name}>
+                  <Card className="metric-card" bordered={false}>
+                    <Form.Item
+                      className="metric-form-item"
+                      label={field.label}
+                      name={field.name}
+                      rules={[{ required: true, message: `${field.label} is required.` }]}
+                    >
+                      <Slider
+                        min={field.min}
+                        max={field.max}
+                        step={field.step}
+                        marks={field.marks}
+                        tooltip={{ formatter: (value) => `${value}${field.unit}` }}
+                      />
+                    </Form.Item>
+
+                    <Form.Item
+                      noStyle
+                      shouldUpdate={(previousValues, currentValues) =>
+                        previousValues[field.name] !== currentValues[field.name]
+                      }
+                    >
+                      {({ getFieldValue }) => {
+                        const value = getFieldValue(field.name);
+                        const isValidNumber = typeof value === 'number' && !Number.isNaN(value);
+                        const formatted = isValidNumber
+                          ? value.toFixed(field.decimals ?? 0)
+                          : '--';
+
+                        return (
+                          <div className="metric-value">
+                            <span>Current value</span>
+                            <strong>
+                              {formatted}
+                              {field.unit}
+                            </strong>
+                          </div>
+                        );
+                      }}
+                    </Form.Item>
+                  </Card>
+                </Col>
+              ))}
             </Row>
-            </div>
+          </Card>
+        ))}
 
-          </Col>
-            </div>
-            <div className="right_col">
-              <Col xxl={24} xl={24} lg={24} md={24} sm={24} xs={24} style={{textAlign: 'center'}}>
-              <Row justify="center" align="top">
-                
-              <Form.Item>
-                <Button type="primary" shape="round" className='button' htmlType="submit">Predict</Button>
-              </Form.Item>
-            </Row>
+        <div className="submit-row">
+          <Button
+            type="primary"
+            htmlType="submit"
+            size="large"
+            className="predict-button"
+            loading={isSubmitting}
+          >
+            Predict Tomorrow
+          </Button>
+        </div>
+      </Form>
 
-            {prediction !== null && 
-              <Row justify="center" align="top" style={{marginTop: '20px'}}>
-                <Card title="Tomorrow's Weather" className="custom-card-result" >
-                  <p>{prediction ? "It's going to rain tomorrow." : "Tomorrow should be a sunny day !"}</p>
-                </Card>
-              </Row>
-            }
-              </Col>
-            </div>
-      </Row>      
-    </Form>
-    </Card>
-    </div>
-</Content>
-<Footer style={{ textAlign: 'center' }}>Weather Prediction ©2023 Created by Pierre Daguier</Footer>
-</div>
-</Layout>
+      {requestError ? (
+        <Alert
+          className="prediction-alert"
+          type="error"
+          showIcon
+          message={requestError}
+        />
+      ) : null}
 
-  </div>
-    </div>
-
+      {prediction !== null ? (
+        <div className={`prediction-banner ${prediction ? 'rainy' : 'dry'}`}>
+          <p className="prediction-kicker">Prediction Result</p>
+          <h3>{prediction ? 'Rain expected tomorrow.' : 'No rain expected tomorrow.'}</h3>
+          <p>
+            {prediction
+              ? 'Prepare for wet conditions and possible precipitation events.'
+              : 'Conditions currently indicate a mostly dry weather profile.'}
+          </p>
+        </div>
+      ) : null}
+    </section>
   );
 }
 

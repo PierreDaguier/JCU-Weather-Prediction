@@ -1,20 +1,31 @@
 import React from 'react';
-import { Menu, Layout } from 'antd';
-import { Link } from "react-router-dom";
-const { Header } = Layout;
+import { Link, useLocation } from 'react-router-dom';
+
+const navItems = [
+  { path: '/', label: 'Weather Prediction' },
+  { path: '/documentation', label: 'Documentation' }
+];
 
 function Navbar() {
+  const location = useLocation();
+
   return (
-    <Header style={{ position: 'relative', zIndex: 1, width: '100%' }}>
-      <Menu theme="dark" className="navbar" mode="horizontal" defaultSelectedKeys={['1']}>
-      <Menu.Item key="1">
-            <Link to="/">Weather Prediction</Link>
-          </Menu.Item>
-          <Menu.Item key="2">
-            <Link to="/documentation">Documentation</Link>
-          </Menu.Item>
-      </Menu>
-    </Header>
+    <nav className="primary-nav" aria-label="Main navigation">
+      {navItems.map((item) => {
+        const isActive = location.pathname === item.path;
+
+        return (
+          <Link
+            key={item.path}
+            to={item.path}
+            className={`nav-pill ${isActive ? 'is-active' : ''}`}
+            aria-current={isActive ? 'page' : undefined}
+          >
+            {item.label}
+          </Link>
+        );
+      })}
+    </nav>
   );
 }
 

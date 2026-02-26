@@ -1,56 +1,38 @@
-
 import React from 'react';
-import WeatherForm from './weatherForm';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Documentation from './documentation';
 import Navbar from './navbar';
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import 'antd'
-
-
+import WeatherForm from './weatherForm';
+import './App.css';
 
 function App() {
-  
-  const handleFormSubmit = async (weatherData) => {
-    try {
-      const response = await fetch('http://localhost:8080/predict', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(weatherData),
-      });
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      const prediction = await response.json();
-      console.log('Prediction:', prediction);
-    } catch (error) {
-      console.log('Error:', error);
-    }
-  };
-  
   return (
-
     <Router>
+      <div className="app-shell">
+        <div className="aurora aurora-one" />
+        <div className="aurora aurora-two" />
+        <div className="grain-overlay" />
 
-      <div className="App">
-        
-        <div className="title-container">
-          <img src="/JCU.png" alt="Logo" className="logo" />
-          <h1>Just Curious University</h1>
-        </div>
-        
-        <nav>
-          
-          
-        </nav>
-        <Navbar />
-        <Routes>
-          <Route path="/documentation" element={<Documentation />} />
-          <Route path="/" element={<WeatherForm onFormSubmit={handleFormSubmit} />} />
-        </Routes>
+        <header className="app-header">
+          <div className="brand-block">
+            <img src="/JCU.png" alt="Just Curious University logo" className="brand-logo" />
+            <div>
+              <p className="brand-kicker">AI Weather Intelligence</p>
+              <h1>Just Curious University</h1>
+            </div>
+          </div>
+          <Navbar />
+        </header>
+
+        <main className="app-main">
+          <Routes>
+            <Route path="/" element={<WeatherForm />} />
+            <Route path="/documentation" element={<Documentation />} />
+          </Routes>
+        </main>
       </div>
     </Router>
   );
 }
 
 export default App;
-

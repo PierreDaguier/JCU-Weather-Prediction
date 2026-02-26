@@ -1,67 +1,67 @@
 import React from 'react';
-import { Typography, Space, List, Anchor } from 'antd';
-const { Title, Paragraph, Text } = Typography;
-const { Link } = Anchor;
+import { List, Typography } from 'antd';
+
+const { Paragraph, Title } = Typography;
+
+const nextSections = [
+  {
+    title: 'Tool Description',
+    description: 'Understand all input variables used for inference.'
+  },
+  {
+    title: 'About Dataset',
+    description: 'Review coverage, temporal span and variable distributions.'
+  },
+  {
+    title: 'Prediction Model',
+    description: 'See preprocessing, training and evaluation details.'
+  },
+  {
+    title: 'Technical Description',
+    description: 'Get architecture, flow and repository structure.'
+  }
+];
 
 function Introduction() {
   return (
-    <div style={{ maxWidth: '60%', margin: '0 auto', textAlign:'left' }}>
+    <div className="doc-section">
       <Typography>
-        <Title style={{fontFamily: 'Playfair Display'}}>Welcome to Rain Prediction Tool</Title>
+        <Title>Welcome to the Rain Prediction Tool</Title>
         <Paragraph>
-          The Rain Prediction Tool is a deep learning-based application capable of predicting whether tomorrow will be rainy or not. 
-          This tool leverages the power of Logistic Regression, trained on a comprehensive dataset sourced from Kaggle. The purpose of creating this tool 
-          is purely educational and it was developed to be presented at James Cook University.
+          This application predicts whether it will rain tomorrow using weather
+          observations from Australian stations. The model is based on Logistic
+          Regression and trained on a large Kaggle dataset.
         </Paragraph>
 
         <Title level={3}>Dataset Source</Title>
         <Paragraph>
-          The dataset was compiled from several weather stations and includes a vast amount of observations. You can access 
-          these observations at <a href="http://www.bom.gov.au/climate/data">Bureau of Meteorology</a>. The dataset contains 
-          145460 lines of data, each representing a unique observation.
+          The training data was compiled from multiple weather stations and contains
+          145,460 observations. The source comes from the Bureau of Meteorology:
+          {' '}
+          <a href="http://www.bom.gov.au/climate/data" target="_blank" rel="noopener noreferrer">
+            bom.gov.au/climate/data
+          </a>
+          .
         </Paragraph>
 
         <Title level={3}>Tech Stack</Title>
         <Paragraph>
-          The application has been built using a variety of technologies. The predictive model is written in Python. The server is developed using Go, 
-          and the front-end is designed using React, supplemented with Ant Design. Google Colab was used as the platform for training the model.
+          The predictive model is written in Python, the API server is in Go,
+          and the interface is built in React with Ant Design.
         </Paragraph>
 
-        <Title level={3}>What's Next?</Title>
-        <Paragraph>
-          Explore more about this application in the following sections:
-        </Paragraph>
-        <List>
-  <List.Item>
-    <Title level={4}><Link href="#tool-description" title="Tool Description" /></Title>
-    </List.Item>
-    <Paragraph>
-      This section explains the various input parameters (e.g., "locations," "humidity," "WindGustDir") used by the model.
-    </Paragraph>
-  
-  <List.Item>
-    <Title level={4}><Link href="#about-dataset" title="About Dataset" /></Title>
-    </List.Item>
-    <Paragraph>
-      Here you can find information about the measurements in the dataset.
-    </Paragraph>
-  
-  <List.Item>
-    <Title level={4}><Link href="#about-prediction-model" title="About Prediction Model" /></Title>
-    </List.Item>
-    <Paragraph>
-      This part describes how the model functions step-by-step.
-    </Paragraph>
-  
-  <List.Item>
-    <Title level={4}><Link href="#technical-description" title="Technical Description" /></Title>
-    </List.Item>
-    <Paragraph>
-      This section offers a comprehensive technical overview of the application, along with a link to the GitHub repository where the source code resides.
-    </Paragraph>
-  
-</List>
+        <Title level={3}>Explore Next</Title>
       </Typography>
+
+      <List
+        className="doc-inline-list"
+        dataSource={nextSections}
+        renderItem={(item) => (
+          <List.Item>
+            <strong>{item.title}:</strong>&nbsp;{item.description}
+          </List.Item>
+        )}
+      />
     </div>
   );
 }

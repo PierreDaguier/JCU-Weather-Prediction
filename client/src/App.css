@@ -209,6 +209,23 @@
   gap: 16px;
 }
 
+.mode-card .ant-card-body {
+  padding-bottom: 16px;
+}
+
+.mode-stack {
+  width: 100%;
+}
+
+.mode-helper {
+  color: var(--ink-700);
+}
+
+.mode-feedback {
+  color: var(--blue-600);
+  font-weight: 600;
+}
+
 .input-card {
   border-radius: var(--radius-lg) !important;
   border: 1px solid rgba(15, 79, 137, 0.14) !important;
@@ -588,6 +605,19 @@
 @media (max-width: 540px) {
   .brand-block h1 {
     font-size: 1.7rem;
+  }
+
+  .mode-stack .ant-segmented {
+    width: 100%;
+  }
+
+  .mode-stack .ant-segmented-group {
+    width: 100%;
+  }
+
+  .mode-stack .ant-segmented-item {
+    flex: 1;
+    text-align: center;
   }
 
   .form-top-grid {

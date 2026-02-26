@@ -89,7 +89,8 @@ The React application requires a reachable prediction API.
 Without `REACT_APP_API_URL`, production builds cannot call the prediction API.
 
 ## Deploy backend on Render
-This repository now includes `Dockerfile` and `render.yaml` for the API service.
+This repository includes `Dockerfile` and `render.yaml` for a FastAPI inference service
+that loads model artifacts once at startup.
 
 1. In Render, create a new service from this GitHub repository.
 2. Render detects `render.yaml` and provisions `jcu-weather-api`.
@@ -99,3 +100,8 @@ This repository now includes `Dockerfile` and `render.yaml` for the API service.
 
 Optional hardening:
 - set `ALLOWED_ORIGIN=https://your-netlify-site.netlify.app` in Render environment variables.
+- set `MODEL_THRESHOLD=0.5` (or your chosen threshold)
+
+Health endpoints:
+- `/health` returns liveness status
+- `/ready` returns readiness and loaded model metadata
